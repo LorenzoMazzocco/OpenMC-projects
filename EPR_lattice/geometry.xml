@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<geometry>
+  <cell id="1" material="7" region="-1" universe="1" />
+  <cell id="2" material="5" region="1 -2" universe="1" />
+  <cell id="3" material="4" region="2 -3" universe="1" />
+  <cell id="4" material="6" region="3" universe="1" />
+  <cell id="5" material="2" region="-1" universe="2" />
+  <cell id="6" material="5" region="1 -2" universe="2" />
+  <cell id="7" material="4" region="2 -3" universe="2" />
+  <cell id="8" material="6" region="3" universe="2" />
+  <cell id="9" material="6" region="-5" universe="3" />
+  <cell id="10" material="4" region="5 -4" universe="3" />
+  <cell id="11" material="6" region="4" universe="3" />
+  <cell id="12" material="6" universe="4" />
+  <cell fill="5" id="13" region="6 -7 8 -9" universe="6" />
+  <lattice id="5">
+    <pitch>1.26 1.26</pitch>
+    <outer>4</outer>
+    <dimension>17 17</dimension>
+    <lower_left>-10.71 -10.71</lower_left>
+    <universes>
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 1 2 2 3 2 2 3 2 2 3 2 2 1 2 2 
+2 2 2 3 2 2 2 1 2 1 2 2 2 3 2 2 2 
+2 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 
+2 2 3 2 2 3 2 2 3 2 2 3 2 2 3 2 2 
+2 2 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 
+2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 2 
+2 2 3 2 2 3 2 2 3 2 2 3 2 2 3 2 2 
+2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 2 
+2 2 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 
+2 2 3 2 2 3 2 2 3 2 2 3 2 2 3 2 2 
+2 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 
+2 2 2 3 2 2 2 1 2 1 2 2 2 3 2 2 2 
+2 2 1 2 2 3 2 2 3 2 2 3 2 2 1 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 </universes>
+  </lattice>
+  <surface coeffs="0.0 0.0 0.3975" id="1" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.4125" id="2" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.475" id="3" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.6125" id="4" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.5725" id="5" type="z-cylinder" />
+  <surface boundary="reflective" coeffs="-10.71" id="6" type="x-plane" />
+  <surface boundary="reflective" coeffs="10.71" id="7" type="x-plane" />
+  <surface boundary="reflective" coeffs="-10.71" id="8" type="y-plane" />
+  <surface boundary="reflective" coeffs="10.71" id="9" type="y-plane" />
+</geometry>
