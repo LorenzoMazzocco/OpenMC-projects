@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material id="10" name="sodium">
+    <density units="g/cm3" value="0.96" />
+    <nuclide ao="1.0" name="Na23" />
+  </material>
+  <material depletable="true" id="13" name="inner">
+    <density units="g/cm3" value="9.999999999999998" />
+    <nuclide ao="0.0007292760039567714" name="U235" />
+    <nuclide ao="0.2845770298360439" name="U238" />
+    <nuclide ao="0.00174332280493054" name="Pu238" />
+    <nuclide ao="0.02309649647632655" name="Pu239" />
+    <nuclide ao="0.014393868376153732" name="Pu240" />
+    <nuclide ao="0.003967105482128524" name="Pu241" />
+    <nuclide ao="0.004994262758237384" name="Pu242" />
+    <nuclide ao="0.0003742552687991336" name="Am241" />
+    <nuclide ao="0.6661243829934234" name="O16" />
+  </material>
+  <material id="14" name="clad">
+    <density units="g/cm3" value="9.999999999999996" />
+    <nuclide ao="0.9907986059570755" name="Cu63" />
+    <nuclide ao="0.005518744028749323" name="O16" />
+    <nuclide ao="2.0923970053610255e-06" name="O17" />
+    <nuclide ao="0.00368055761716979" name="Al27" />
+  </material>
+</materials>

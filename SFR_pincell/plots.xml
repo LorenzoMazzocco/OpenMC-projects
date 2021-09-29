@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plots>
+  <plot basis="xy" color_by="material" filename="images/geometry/top_view" id="2" type="slice">
+    <origin>0.0 0.0 0.0</origin>
+    <width>1.0730001 1.0730001</width>
+    <pixels>1500 1500</pixels>
+    <color id="10" rgb="255 165 0" />
+    <color id="13" rgb="255 255 0" />
+    <color id="14" rgb="128 128 128" />
+  </plot>
+  <plot basis="xz" color_by="material" filename="images/geometry/side_view" id="3" type="slice">
+    <origin>0.0 0.0 0.0</origin>
+    <width>1.0730001 1.0730001</width>
+    <pixels>400 400</pixels>
+    <color id="10" rgb="255 165 0" />
+    <color id="13" rgb="255 255 0" />
+    <color id="14" rgb="128 128 128" />
+  </plot>
+</plots>
