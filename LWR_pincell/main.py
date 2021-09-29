@@ -5,7 +5,7 @@ Le informazioni da estrarre sono:
     - tasso di reazione fissione (plot 2D, grafico del tasso radiale sotto la geometria)
     - tasso di reazione cattura (plot 2D, grafico del tasso radiale sotto la geometria)
     - tasso di reazione scattering elastico (plot 2D, grafico del tasso radiale sotto la geometria)
-    x energia media dei neutroni (plot 2D, grafico radiale)
+    - energia media dei neutroni (plot 2D, grafico radiale)
 """
 
 import openmc
@@ -13,8 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import math
-
-
 
 #================================================================ FUNCTIONS =============================
 
@@ -41,11 +39,11 @@ r_clad_out = 0.46
 pitch = 1.26
 
 mesh_dimension = 300
-red_mesh_dimension = 200
+red_mesh_dimension = 300
 energies_dimension = 500
 red_energies_dimension = 10
 
-neutrons_per_batch = 1000
+neutrons_per_batch = 5000
 
 
 #================================================================ DEFINE MATERIALS ===========================
@@ -213,7 +211,7 @@ tallies.append(t_flux_ene)
 tallies.export_to_xml()
 
 #================================================================ RUN SIMULATION ===========================
-#openmc.run()
+openmc.run()
 
 #================================================================ POST PROCESSING ===========================
 
@@ -310,7 +308,7 @@ tally_flux_ene = sp.get_tally(name='tally_flux_ene')
 df = tally_flux_ene.get_pandas_dataframe()
 
 mean_energy_mesh = np.zeros((red_mesh_dimension,red_mesh_dimension))
-"""
+
 for i in range(red_mesh_dimension):
     for j in range(red_mesh_dimension):
         crit_pos = (df['mesh 2']['x'] == i+1) & (df['mesh 2']['y'] == j+1)
@@ -323,7 +321,7 @@ for i in range(red_mesh_dimension):
         print('Processing mean neutron energy mesh \t\t Done ({}/{},{})'.format(i,red_mesh_dimension,j))
 
 np.savetxt("mean_energy_mesh.csv", mean_energy_mesh, delimiter=",")
-"""
+
 mean_energy_mesh = np.genfromtxt('mean_energy_mesh.csv', delimiter=',')
 
 plt.imshow(mean_energy_mesh, cmap='jet')

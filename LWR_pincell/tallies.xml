@@ -6,7 +6,7 @@
     <upper_right>0.63 0.63</upper_right>
   </mesh>
   <mesh id="2">
-    <dimension>200 200</dimension>
+    <dimension>300 300</dimension>
     <lower_left>-0.63 -0.63</lower_left>
     <upper_right>0.63 0.63</upper_right>
   </mesh>
