@@ -6,8 +6,11 @@ import math
 
 #================================================================ FUNCTIONS =============================
 
-def plot_radially(radial_data, xlabel, ylabel, title, alpha=0.5):
-    geom_image = mpimg.imread('images/geometry/side_view_partial.ppm')
+def plot_radially(radial_data, xlabel, ylabel, title, alpha=0.5, diag=False):
+    if diag:
+        geom_image = mpimg.imread('images/{}/geometry/side_view_diag.ppm'.format(configuration['name']))
+    else:
+        geom_image = mpimg.imread('images/{}/geometry/side_view_partial.ppm'.format(configuration['name']))
     fig, axs = plt.subplots(2,1, sharex=True,sharey=True, figsize=(15,10))
     fig.suptitle('{}'.format(title))
     axs[0].plot(np.linspace(0,assembly_side/2,len(radial_data)),radial_data, 'r-', linewidth=1.5)
@@ -32,6 +35,7 @@ def reconstruct_complete_mesh(up_right):
     return complete
 
 
+
 #==================================================== VARIABLES =======================
 
 #fuel variables
@@ -49,6 +53,7 @@ channel_clad_or = 0.6125
 
 pitch = 1.26
 assembly_side = 17*pitch
+
 
 #tally variables
 mesh_dimension = 300
@@ -147,6 +152,89 @@ c = openmc.Universe(cells=[in_channel_cell, channel_clad_cell, out_channel_cell]
 all_water_cell = openmc.Cell(fill=H2O)
 outer_universe = openmc.Universe(cells=[all_water_cell])
 
+#==================================================== CONFIGURATIONS =======================
+
+config_20 = {'lattice':
+            [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,b,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,b,f,f,f,f],
+            [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
+            'name': 'config_20_BA'}
+
+config_16 = {'lattice':
+            [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
+            'name': 'config_16_BA'}
+
+config_12 = {'lattice':
+            [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,c,f,f,f,f,f,f,f,f,f,c,f,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,f,c,f,f,f,f,f,f,f,f,f,c,f,f,f],
+            [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
+            'name': 'config_12_BA'}
+
+config_8 = {'lattice':
+            [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,c,f,f,c,f,f,c,f,f,f,f,f],
+            [f,f,f,c,f,f,f,f,f,f,f,f,f,c,f,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,b,f,f,f],
+            [f,f,f,f,b,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
+            [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
+            [f,f,f,c,f,f,f,f,f,f,f,f,f,c,f,f,f],
+            [f,f,f,f,f,c,f,f,c,f,f,c,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
+            [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
+            'name': 'config_8_BA'}
+
+configuration = config_8
 
 #CREATE THE LATTICE
 
@@ -154,23 +242,7 @@ lattice = openmc.RectLattice()
 lattice.lower_left = (-assembly_side/2, -assembly_side/2)
 lattice.pitch = (pitch,pitch)
 lattice.outer = outer_universe
-lattice.universes= [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
-                    [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
-                    [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
-                    [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
-                    [f,f,f,f,b,f,f,f,f,f,f,f,b,f,f,f,f],
-                    [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
-                    [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
-                    [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
-                    [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
-                    [f,f,f,b,f,f,f,f,f,f,f,f,f,b,f,f,f],
-                    [f,f,f,f,f,f,b,f,f,f,b,f,f,f,f,f,f],
-                    [f,f,c,f,f,c,f,f,c,f,f,c,f,f,c,f,f],
-                    [f,f,f,f,b,f,f,f,f,f,f,f,b,f,f,f,f],
-                    [f,f,f,c,f,f,f,b,f,b,f,f,f,c,f,f,f],
-                    [f,f,b,f,f,c,f,f,c,f,f,c,f,f,b,f,f],
-                    [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
-                    [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]]
+lattice.universes= configuration['lattice']
 
 
 #===================================COMPLETE GEOMETRY
@@ -193,7 +265,7 @@ geom_plot_top.width = (assembly_side, assembly_side)
 geom_plot_top.pixels = (1500, 1500)
 geom_plot_top.color_by = 'material'
 geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_top.filename = 'images/geometry/top_view_complete'
+geom_plot_top.filename = 'images/{}/geometry/top_view_complete'.format(configuration['name'])
 
 #side view
 geom_plot_side = openmc.Plot()
@@ -203,7 +275,7 @@ geom_plot_side.width = (assembly_side, assembly_side)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
 geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_side.filename = 'images/geometry/side_view_complete'
+geom_plot_side.filename = 'images/{}/geometry/side_view_complete'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_top, geom_plot_side])
 plots.export_to_xml()
@@ -236,7 +308,7 @@ geom_plot_side.width = (17*pitch_diag/2, 3*pitch)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
 geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_side.filename = 'images/geometry/side_view_diag'
+geom_plot_side.filename = 'images/{}/geometry/side_view_diag'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_side])
 plots.export_to_xml()
@@ -262,7 +334,7 @@ geom_plot_top.width = (assembly_side/2, assembly_side/2)
 geom_plot_top.pixels = (1500, 1500)
 geom_plot_top.color_by = 'material'
 geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_top.filename = 'images/geometry/top_view_partial'
+geom_plot_top.filename = 'images/{}/geometry/top_view_partial'.format(configuration['name'])
 
 #side view
 geom_plot_side = openmc.Plot()
@@ -272,7 +344,7 @@ geom_plot_side.width = (assembly_side/2, assembly_side/2)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
 geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_side.filename = 'images/geometry/side_view_partial'
+geom_plot_side.filename = 'images/{}/geometry/side_view_partial'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_top, geom_plot_side])
 plots.export_to_xml()
@@ -348,7 +420,7 @@ plt.loglog(energies[:-1], tally_tot_flux.mean[:,0,0])
 plt.xlabel('Energy [eV]')
 plt.ylabel('E*Phi(E) [arbitrary units]')
 plt.grid()
-plt.savefig("images/plots/flux_spectrum.png", dpi=700)
+plt.savefig("images/{}/plots/flux_spectrum.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 
@@ -362,7 +434,7 @@ flux_rec = reconstruct_complete_mesh(flux.mean)
 plt.imshow(flux_rec, cmap='coolwarm', origin='lower')
 plt.title('Neutron flux [arbitrary units]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
-plt.savefig("images/plots/flux.png", dpi=700)
+plt.savefig("images/{}/plots/flux.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 #fission reaction rate
@@ -373,7 +445,7 @@ fission_rr_rec = reconstruct_complete_mesh(fission_rr.mean)
 plt.imshow(fission_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Fission Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
-plt.savefig("images/plots/fission_RR.png", dpi=700)
+plt.savefig("images/{}/plots/fission_RR.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 #scattering reaction rate
@@ -384,7 +456,7 @@ elastic_rr_rec = reconstruct_complete_mesh(elastic_rr.mean)
 plt.imshow(elastic_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Elastic Scattering Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
-plt.savefig("images/plots/elastic_RR.png", dpi=700)
+plt.savefig("images/{}/plots/elastic_RR.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 #capture reaction rate
@@ -395,7 +467,7 @@ capture_rr_rec = reconstruct_complete_mesh(capture_rr.mean)
 plt.imshow(capture_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Radiative Capture Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
-plt.savefig("images/plots/capture_RR.png", dpi=700)
+plt.savefig("images/{}/plots/capture_RR.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 #recoverable energy
@@ -406,35 +478,75 @@ rec_ene_rec = reconstruct_complete_mesh(rec_ene.mean)
 plt.imshow(rec_ene_rec, cmap='coolwarm', origin='lower')
 plt.title('Recoverable energy [ev/src]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
-plt.savefig("images/plots/recoverable_energy.png", dpi=700)
+plt.savefig("images/{}/plots/recoverable_energy.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 print('\nTop plots completed...')
 
 #RADIAL
 radial_index=0
+radial_flux = flux.mean[radial_index,:]
 radial_fission = fission_rr.mean[radial_index,:]
 radial_capture = capture_rr.mean[radial_index,:]
 radial_elastic = elastic_rr.mean[radial_index,:]
 radial_recene = rec_ene.mean[radial_index,:]
 
 
+plot_radially(radial_flux, title='Radial distribution of neutron flux \nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]')
+plt.savefig("images/{}/radial_plots/flux.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+
 plot_radially(radial_fission, title='Radial distribution of fission reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/fission_rr.png", dpi=700)
+plt.savefig("images/{}/radial_plots/fission_rr.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 
 plot_radially(radial_capture, title='Radial distribution of (n,gamma) reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='(n,gamma) reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/capture_rr.png", dpi=700)
+plt.savefig("images/{}/radial_plots/capture_rr.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 
 plot_radially(radial_elastic, title='Radial distribution of elastic scattering reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Elastic Scattering reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/elastic_rr.png", dpi=700)
+plt.savefig("images/{}/radial_plots/elastic_rr.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 plot_radially(radial_recene, title='Radial distribution of recoverable energy\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Recoverable energy [eV/src]')
-plt.savefig("images/radial_plots/recoverable_energy.png", dpi=700)
+plt.savefig("images/{}/radial_plots/recoverable_energy.png".format(configuration['name']), dpi=700)
 plt.clf()
 
 print('\nRadial plots completed...')
+
+
+#RADIAL DIAG
+
+radial_diag_flux = np.diag(flux.mean)
+radial_diag_fission = np.diag(fission_rr.mean)
+radial_diag_capture = np.diag(capture_rr.mean)
+radial_diag_elastic = np.diag(elastic_rr.mean)
+radial_diag_recene = np.diag(rec_ene.mean)
+
+plot_radially(radial_diag_flux, title='Radial distribution of neutron flux \nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]', diag=True)
+plt.savefig("images/{}/radial_diag_plots/flux.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+
+plot_radially(radial_diag_fission, title='Radial distribution of fission reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]', diag=True)
+plt.savefig("images/{}/radial_diag_plots/fission_rr.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+
+plot_radially(radial_diag_capture, title='Radial distribution of (n,gamma) reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='(n,gamma) reaction rate [1/s-src]', diag=True)
+plt.savefig("images/{}/radial_diag_plots/capture_rr.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+
+plot_radially(radial_diag_elastic, title='Radial distribution of elastic scattering reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Elastic Scattering reaction rate [1/s-src]', diag=True)
+plt.savefig("images/{}/radial_diag_plots/elastic_rr.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+plot_radially(radial_diag_recene, title='Radial distribution of recoverable energy\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Recoverable energy [eV/src]', diag=True)
+plt.savefig("images/{}/radial_diag_plots/recoverable_energy.png".format(configuration['name']), dpi=700)
+plt.clf()
+
+print('\nRadial diag plots completed...')
