@@ -7,18 +7,30 @@ import math
 #================================================================ FUNCTIONS =============================
 
 def plot_radially(radial_data, xlabel, ylabel, title, alpha=0.5):
-    geom_image = mpimg.imread('images/geometry/side_view.ppm')
+    geom_image = mpimg.imread('images/geometry/side_view_partial.ppm')
     fig, axs = plt.subplots(2,1, sharex=True,sharey=True, figsize=(15,10))
     fig.suptitle('{}'.format(title))
-    axs[0].plot(np.linspace(-assembly_side/2,assembly_side/2,len(radial_data)),radial_data, 'r-', linewidth=2)
-    axs[1].imshow(geom_image, alpha=alpha, origin='lower', extent=[-assembly_side/2,assembly_side/2,0,1.2*max(radial_data)])
-    axs[1].plot(np.linspace(-assembly_side/2,assembly_side/2,len(radial_data)), radial_data,'r-', linewidth=3)
+    axs[0].plot(np.linspace(0,assembly_side/2,len(radial_data)),radial_data, 'r-', linewidth=1.5)
+    axs[1].imshow(geom_image, alpha=alpha, origin='lower', extent=[0,assembly_side/2,0,1.2*max(radial_data)])
+    axs[1].plot(np.linspace(0,assembly_side/2,len(radial_data)), radial_data,'r-', linewidth=1.5)
     axs[1].xaxis.tick_top()
     axs[1].xaxis.set_label_position('top')
     axs[1].set_xlabel('{}'.format(xlabel))
     axs[1].set_aspect('auto')
     for ax in axs:
         ax.set_ylabel('{}'.format(ylabel))
+
+
+
+def reconstruct_complete_mesh(up_right):
+    down_right = np.flip(up_right,1)
+    up_left = np.flip(up_right,0)
+    down_left = np.flip(up_left,1)
+    complete = np.block([
+                        [down_left,up_left],
+                        [down_right,up_right]])
+    return complete
+
 
 #==================================================== VARIABLES =======================
 
@@ -39,13 +51,13 @@ pitch = 1.26
 assembly_side = 17*pitch
 
 #tally variables
-mesh_dimension = 600
+mesh_dimension = 300
 red_mesh_dimension = 300
 energies_dimension = 500
 red_energies_dimension = 10
 
 #settings variables
-neutrons_per_batch = 10000
+neutrons_per_batch = 15000
 
 
 #======================================================================= DEFINE MATERIALS =======================
@@ -161,7 +173,7 @@ lattice.universes= [[f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f],
                     [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]]
 
 
-#create geometry
+#===================================COMPLETE GEOMETRY
 
 #boundaries
 left = openmc.XPlane(x0=-assembly_side/2, boundary_type='reflective')
@@ -173,9 +185,6 @@ main_cell = openmc.Cell(fill=lattice, region=+left & -right & +bottom & -top)
 geometry = openmc.Geometry([main_cell])
 geometry.export_to_xml()
 
-
-#===================================================================================== PLOT GEOMETRY ===========================
-
 #top view
 geom_plot_top = openmc.Plot()
 geom_plot_top.basis = 'xy'
@@ -184,7 +193,7 @@ geom_plot_top.width = (assembly_side, assembly_side)
 geom_plot_top.pixels = (1500, 1500)
 geom_plot_top.color_by = 'material'
 geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_top.filename = 'images/geometry/top_view'
+geom_plot_top.filename = 'images/geometry/top_view_complete'
 
 #side view
 geom_plot_side = openmc.Plot()
@@ -194,16 +203,87 @@ geom_plot_side.width = (assembly_side, assembly_side)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
 geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
-geom_plot_side.filename = 'images/geometry/side_view'
+geom_plot_side.filename = 'images/geometry/side_view_complete'
+
+plots = openmc.Plots([geom_plot_top, geom_plot_side])
+plots.export_to_xml()
+openmc.plot_geometry()
+
+#===================================DIAGONAL PARTIAL GEOMETRY
+
+pitch_diag = math.sqrt(2)*pitch
+lattice_diag = openmc.RectLattice()
+lattice_diag.lower_left = (-math.sqrt(2)*assembly_side/2, -pitch/2)
+lattice_diag.pitch = (pitch_diag,pitch)
+lattice_diag.outer = outer_universe
+d = np.diag(lattice.universes)
+lattice_diag.universes = np.block([[d],[d],[d]])
+
+left = openmc.XPlane(x0=-17*pitch_diag/2, boundary_type='reflective')
+right = openmc.XPlane(x0=17*pitch_diag/2, boundary_type='reflective')
+bottom = openmc.YPlane(y0=-1.5*pitch, boundary_type='reflective')
+top = openmc.YPlane(y0=1.5*pitch, boundary_type='reflective')
+
+main_cell = openmc.Cell(fill=lattice_diag, region=+left & -right & +bottom & -top)
+geometry = openmc.Geometry([main_cell])
+geometry.export_to_xml()
+
+#side view diag (partial)
+geom_plot_side = openmc.Plot()
+geom_plot_side.basis = 'xz'
+geom_plot_side.origin = (17*pitch_diag/4, 0., 0.)
+geom_plot_side.width = (17*pitch_diag/2, 3*pitch)
+geom_plot_side.pixels = (1500, 1500)
+geom_plot_side.color_by = 'material'
+geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_side.filename = 'images/geometry/side_view_diag'
+
+plots = openmc.Plots([geom_plot_side])
+plots.export_to_xml()
+openmc.plot_geometry()
+
+#===================================PARTIAL GEOMETRY
+
+#boundaries
+left = openmc.XPlane(x0=0, boundary_type='reflective')
+right = openmc.XPlane(x0=assembly_side/2, boundary_type='reflective')
+bottom = openmc.YPlane(y0=0, boundary_type='reflective')
+top = openmc.YPlane(y0=assembly_side/2, boundary_type='reflective')
+
+main_cell = openmc.Cell(fill=lattice, region=+left & -right & +bottom & -top)
+geometry = openmc.Geometry([main_cell])
+geometry.export_to_xml()
+
+#top view
+geom_plot_top = openmc.Plot()
+geom_plot_top.basis = 'xy'
+geom_plot_top.origin = (assembly_side/4, assembly_side/4, 0.)
+geom_plot_top.width = (assembly_side/2, assembly_side/2)
+geom_plot_top.pixels = (1500, 1500)
+geom_plot_top.color_by = 'material'
+geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_top.filename = 'images/geometry/top_view_partial'
+
+#side view
+geom_plot_side = openmc.Plot()
+geom_plot_side.basis = 'xz'
+geom_plot_side.origin = (assembly_side/4, 0, 0.)
+geom_plot_side.width = (assembly_side/2, assembly_side/2)
+geom_plot_side.pixels = (1500, 1500)
+geom_plot_side.color_by = 'material'
+geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_side.filename = 'images/geometry/side_view_partial'
 
 plots = openmc.Plots([geom_plot_top, geom_plot_side])
 plots.export_to_xml()
 openmc.plot_geometry()
 
 
+
+
 #================================================================ DEFINE SETTINGS ===========================
 
-point = openmc.stats.Point((0, 0, 0))
+point = openmc.stats.Point((assembly_side/4, assembly_side/4, 0))
 source = openmc.Source(space=point)
 
 settings = openmc.Settings()
@@ -227,7 +307,7 @@ particle_filter = openmc.ParticleFilter('neutron')
 #mesh
 mesh = openmc.RegularMesh()
 mesh.dimension = [mesh_dimension, mesh_dimension]
-mesh.lower_left = [-assembly_side/2, -assembly_side/2]
+mesh.lower_left = [0, 0]
 mesh.upper_right = [assembly_side/2, assembly_side/2]
 mesh_filter = openmc.MeshFilter(mesh)
 
@@ -244,7 +324,7 @@ tallies.append(t_tot_flux_spec)
 #mesh tally (fission, capture, scattering RR)
 t_mesh = openmc.Tally(name='mesh_tally')
 t_mesh.filters = [mesh_filter]
-t_mesh.scores = ['fission', '(n,gamma)', 'elastic', 'fission-q-recoverable']
+t_mesh.scores = ['fission', '(n,gamma)', 'elastic', 'fission-q-recoverable', 'flux']
 tallies.append(t_mesh)
 
 
@@ -273,11 +353,24 @@ plt.clf()
 
 
 tally_mesh = sp.get_tally(name='mesh_tally')
+
+#flux
+flux = tally_mesh.get_slice(scores=['flux'])
+flux.mean.shape = (mesh_dimension,mesh_dimension)
+flux_rec = reconstruct_complete_mesh(flux.mean)
+
+plt.imshow(flux_rec, cmap='coolwarm', origin='lower')
+plt.title('Neutron flux [arbitrary units]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
+plt.colorbar()
+plt.savefig("images/plots/flux.png", dpi=700)
+plt.clf()
+
 #fission reaction rate
 fission_rr = tally_mesh.get_slice(scores=['fission'])
 fission_rr.mean.shape = (mesh_dimension,mesh_dimension)
+fission_rr_rec = reconstruct_complete_mesh(fission_rr.mean)
 
-plt.imshow(fission_rr.mean, cmap='jet')
+plt.imshow(fission_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Fission Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
 plt.savefig("images/plots/fission_RR.png", dpi=700)
@@ -286,8 +379,9 @@ plt.clf()
 #scattering reaction rate
 elastic_rr = tally_mesh.get_slice(scores=['(n,elastic)'])
 elastic_rr.mean.shape = (mesh_dimension,mesh_dimension)
+elastic_rr_rec = reconstruct_complete_mesh(elastic_rr.mean)
 
-plt.imshow(elastic_rr.mean, cmap='jet')
+plt.imshow(elastic_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Elastic Scattering Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
 plt.savefig("images/plots/elastic_RR.png", dpi=700)
@@ -296,8 +390,9 @@ plt.clf()
 #capture reaction rate
 capture_rr = tally_mesh.get_slice(scores=['(n,gamma)'])
 capture_rr.mean.shape = (mesh_dimension,mesh_dimension)
+capture_rr_rec = reconstruct_complete_mesh(capture_rr.mean)
 
-plt.imshow(capture_rr.mean, cmap='jet')
+plt.imshow(capture_rr_rec, cmap='coolwarm', origin='lower')
 plt.title('Radiative Capture Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
 plt.savefig("images/plots/capture_RR.png", dpi=700)
@@ -306,8 +401,9 @@ plt.clf()
 #recoverable energy
 rec_ene = tally_mesh.get_slice(scores=['fission-q-recoverable'])
 rec_ene.mean.shape = (mesh_dimension,mesh_dimension)
+rec_ene_rec = reconstruct_complete_mesh(rec_ene.mean)
 
-plt.imshow(rec_ene.mean, cmap='jet')
+plt.imshow(rec_ene_rec, cmap='coolwarm', origin='lower')
 plt.title('Recoverable energy [ev/src]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
 plt.colorbar()
 plt.savefig("images/plots/recoverable_energy.png", dpi=700)
@@ -316,7 +412,7 @@ plt.clf()
 print('\nTop plots completed...')
 
 #RADIAL
-radial_index=int((mesh_dimension/2)-1)
+radial_index=0
 radial_fission = fission_rr.mean[radial_index,:]
 radial_capture = capture_rr.mean[radial_index,:]
 radial_elastic = elastic_rr.mean[radial_index,:]

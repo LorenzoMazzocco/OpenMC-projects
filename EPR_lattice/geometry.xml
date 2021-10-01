@@ -12,7 +12,7 @@
   <cell id="10" material="4" region="5 -4" universe="3" />
   <cell id="11" material="6" region="4" universe="3" />
   <cell id="12" material="6" universe="4" />
-  <cell fill="5" id="13" region="6 -7 8 -9" universe="6" />
+  <cell fill="5" id="15" region="14 -15 16 -17" universe="9" />
   <lattice id="5">
     <pitch>1.26 1.26</pitch>
     <outer>4</outer>
@@ -42,8 +42,8 @@
   <surface coeffs="0.0 0.0 0.475" id="3" type="z-cylinder" />
   <surface coeffs="0.0 0.0 0.6125" id="4" type="z-cylinder" />
   <surface coeffs="0.0 0.0 0.5725" id="5" type="z-cylinder" />
-  <surface boundary="reflective" coeffs="-10.71" id="6" type="x-plane" />
-  <surface boundary="reflective" coeffs="10.71" id="7" type="x-plane" />
-  <surface boundary="reflective" coeffs="-10.71" id="8" type="y-plane" />
-  <surface boundary="reflective" coeffs="10.71" id="9" type="y-plane" />
+  <surface boundary="reflective" coeffs="0" id="14" type="x-plane" />
+  <surface boundary="reflective" coeffs="10.71" id="15" type="x-plane" />
+  <surface boundary="reflective" coeffs="0" id="16" type="y-plane" />
+  <surface boundary="reflective" coeffs="10.71" id="17" type="y-plane" />
 </geometry>
