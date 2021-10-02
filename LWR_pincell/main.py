@@ -16,19 +16,43 @@ import math
 
 #================================================================ FUNCTIONS =============================
 
-def plot_radially(radial_data, xlabel, ylabel, title, alpha=0.5):
+def mesh_plot(mesh_data,title,filename, reduced=False):
+    if reduced:
+        mesh_dim=red_mesh_dimension
+    else:
+        mesh_dim=mesh_dimension
+    plt.imshow(mesh_data, cmap='jet', origin='lower', extent = [-pitch/2,pitch/2,-pitch/2,pitch/2])
+    plt.suptitle(title,fontsize=14)
+    plt.title('mesh size: [{},{}]   |   neutrons/batch: {}'.format(mesh_dim,mesh_dim,neutrons_per_batch),fontsize=10)
+    plt.xlabel('Distance from center [cm]')
+    plt.ylabel('Distance from center [cm]')
+    plt.colorbar()
+    plt.savefig("images/plots/{}.png".format(filename), dpi=700)
+    plt.clf()
+
+
+
+def plot_radially(radial_data, ylabel, title, filename, alpha=0.5, reduced=False):
+    if reduced:
+        mesh_dim = red_mesh_dimension
+    else:
+        mesh_dim = mesh_dimension
     geom_image = mpimg.imread('images/geometry/side_view.ppm')
     fig, axs = plt.subplots(2,1, sharex=True,sharey=True, figsize=(15,10))
-    fig.suptitle('{}'.format(title))
+    fig.suptitle('{}'.format(title), fontsize=19)
+    axs[0].set_title('mesh size: [{},{}]   |   neutrons/batch: {}'.format(mesh_dim,mesh_dim,neutrons_per_batch),fontsize=14, pad=30)
     axs[0].plot(np.linspace(-pitch/2,pitch/2,len(radial_data)),radial_data, 'r-', linewidth=2)
     axs[1].imshow(geom_image, alpha=alpha, origin='lower', extent=[-pitch/2,pitch/2,0,1.2*max(radial_data)])
     axs[1].plot(np.linspace(-pitch/2,pitch/2,len(radial_data)), radial_data,'r-', linewidth=3)
     axs[1].xaxis.tick_top()
     axs[1].xaxis.set_label_position('top')
-    axs[1].set_xlabel('{}'.format(xlabel))
+    axs[1].set_xlabel('Radial distance from center [cm]')
     axs[1].set_aspect('auto')
     for ax in axs:
         ax.set_ylabel('{}'.format(ylabel))
+
+    plt.savefig("images/radial_plots/{}.png".format(filename), dpi=700)
+    plt.clf()
 
 
 U_enr = 5.0
@@ -211,7 +235,7 @@ tallies.append(t_flux_ene)
 tallies.export_to_xml()
 
 #================================================================ RUN SIMULATION ===========================
-openmc.run()
+#openmc.run()
 
 #================================================================ POST PROCESSING ===========================
 
@@ -233,45 +257,31 @@ plt.clf()
 
 
 tally_mesh = sp.get_tally(name='mesh_tally')
+mesh_cell_volume= (pitch/mesh_dimension)**2
+red_mesh_cell_volume= (pitch/red_mesh_dimension)**2
+
 #fission reaction rate
 fission_rr = tally_mesh.get_slice(scores=['fission'])
 fission_rr.mean.shape = (mesh_dimension,mesh_dimension)
+mesh_plot(fission_rr.mean/mesh_cell_volume, 'Fission reaction rate [1/cm3-src]', 'fission_rr')
 
-plt.imshow(fission_rr.mean, cmap='jet')
-plt.title('Fission Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
-plt.colorbar()
-plt.savefig("images/plots/fission_RR.png", dpi=700)
-plt.clf()
 
 #scattering reaction rate
 elastic_rr = tally_mesh.get_slice(scores=['(n,elastic)'])
 elastic_rr.mean.shape = (mesh_dimension,mesh_dimension)
+mesh_plot(elastic_rr.mean/mesh_cell_volume, 'Elastic Scattering Reaction Rate [1/cm3-src]', 'elastic_rr')
 
-plt.imshow(elastic_rr.mean, cmap='jet')
-plt.title('Elastic Scattering Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
-plt.colorbar()
-plt.savefig("images/plots/elastic_RR.png", dpi=700)
-plt.clf()
 
 #capture reaction rate
 capture_rr = tally_mesh.get_slice(scores=['(n,gamma)'])
 capture_rr.mean.shape = (mesh_dimension,mesh_dimension)
+mesh_plot(capture_rr.mean/mesh_cell_volume, 'Radiative Capture Reaction Rate [1/cm3-src]', 'capture_rr')
 
-plt.imshow(capture_rr.mean, cmap='jet')
-plt.title('Radiative Capture Reaction Rate [reaction/s]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
-plt.colorbar()
-plt.savefig("images/plots/capture_RR.png", dpi=700)
-plt.clf()
 
 #recoverable energy
 rec_ene = tally_mesh.get_slice(scores=['fission-q-recoverable'])
 rec_ene.mean.shape = (mesh_dimension,mesh_dimension)
-
-plt.imshow(rec_ene.mean, cmap='jet')
-plt.title('Recoverable energy [ev/src]\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), pad=10)
-plt.colorbar()
-plt.savefig("images/plots/recoverable_energy.png", dpi=700)
-plt.clf()
+mesh_plot(rec_ene.mean/mesh_cell_volume, 'Recoverable energy [eV/cm3-src]', 'recoverable_energy')
 
 print('\nTop plots completed...')
 
@@ -283,23 +293,13 @@ radial_elastic = elastic_rr.mean[radial_index,:]
 radial_recene = rec_ene.mean[radial_index,:]
 
 
-plot_radially(radial_fission, title='Radial distribution of fission reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/fission_rr.png", dpi=700)
-plt.clf()
+plot_radially(radial_fission/mesh_cell_volume, title='Radial distribution of fission reaction rate [1/cm3-src]', ylabel='Fission reaction rate [1/cm3-src]', filename='fission_rr')
 
+plot_radially(radial_capture/mesh_cell_volume, title='Radial distribution of (n,gamma) reaction rate [1/cm3-src]', ylabel='(n,gamma) reaction rate [1/cm3-src]', filename='capture_rr')
 
-plot_radially(radial_capture, title='Radial distribution of (n,gamma) reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='(n,gamma) reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/capture_rr.png", dpi=700)
-plt.clf()
+plot_radially(radial_elastic/mesh_cell_volume, title='Radial distribution of elastic scattering reaction rate [1/cm3-src]', ylabel='Elastic Scattering reaction rate [1/cm3-src]', filename='elastic_rr')
 
-
-plot_radially(radial_elastic, title='Radial distribution of elastic scattering reaction rate\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Elastic Scattering reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/elastic_rr.png", dpi=700)
-plt.clf()
-
-plot_radially(radial_recene, title='Radial distribution of recoverable energy\nmesh_dim: {} -- neutrons/batch: {}'.format(mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Recoverable energy [eV/src]')
-plt.savefig("images/radial_plots/recoverable_energy.png", dpi=700)
-plt.clf()
+plot_radially(radial_recene/mesh_cell_volume, title='Radial distribution of recoverable energy [eV/cm3-src]', ylabel='Recoverable energy [eV/cm3-src]', filename='recoverable_energy')
 
 print('\nRadial plots completed...')
 
@@ -309,6 +309,8 @@ df = tally_flux_ene.get_pandas_dataframe()
 
 mean_energy_mesh = np.zeros((red_mesh_dimension,red_mesh_dimension))
 
+#if mean_energy_mesh.csv is not updated then uncomment
+"""
 for i in range(red_mesh_dimension):
     for j in range(red_mesh_dimension):
         crit_pos = (df['mesh 2']['x'] == i+1) & (df['mesh 2']['y'] == j+1)
@@ -321,16 +323,12 @@ for i in range(red_mesh_dimension):
         print('Processing mean neutron energy mesh \t\t Done ({}/{},{})'.format(i,red_mesh_dimension,j))
 
 np.savetxt("mean_energy_mesh.csv", mean_energy_mesh, delimiter=",")
-
+"""
 mean_energy_mesh = np.genfromtxt('mean_energy_mesh.csv', delimiter=',')
 
-plt.imshow(mean_energy_mesh, cmap='jet')
-plt.title('Mean neutron energy [eV]\nmesh_dim: {} -- neutrons/batch: {}'.format(red_mesh_dimension,neutrons_per_batch), pad=10)
-plt.colorbar()
-plt.savefig("images/plots/mean_neutron_energy.png", dpi=700)
-plt.clf()
+
+mesh_plot(mean_energy_mesh, 'Mean neutron energy [eV]', 'mean_neutron_energy', reduced=True)
+
 
 radial_index=int((red_mesh_dimension/2)-1)
-plot_radially(mean_energy_mesh[radial_index,:], title='Mean neutron energy [eV]\nmesh_dim: {} -- neutrons/batch: {}'.format(red_mesh_dimension,neutrons_per_batch), xlabel='Radial Distance [cm]', ylabel='Mean neutron energy [eV]')
-plt.savefig("images/radial_plots/mean_neutron_energy.png", dpi=700)
-plt.clf()
+plot_radially(mean_energy_mesh[radial_index,:], title='Mean neutron energy [eV]', ylabel='Mean neutron energy [eV]', filename='mean_neutron_energy')
