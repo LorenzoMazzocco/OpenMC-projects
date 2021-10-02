@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plots>
+  <plot basis="xy" color_by="material" filename="model_geometry/top_view" id="2" type="slice">
+    <origin>0.0 0.0 0.0</origin>
+    <width>42.5 42.5</width>
+    <pixels>1500 1500</pixels>
+    <color id="2" rgb="255 255 153" />
+    <color id="4" rgb="128 128 128" />
+    <color id="5" rgb="0 128 0" />
+    <color id="6" rgb="102 178 255" />
+    <color id="7" rgb="255 153 255" />
+  </plot>
+  <plot basis="xz" color_by="material" filename="model_geometry/side_view" id="4" type="slice">
+    <origin>0.0 0.0 0.0</origin>
+    <width>42.5 42.5</width>
+    <pixels>1500 1500</pixels>
+    <color id="2" rgb="255 255 153" />
+    <color id="4" rgb="128 128 128" />
+    <color id="5" rgb="0 128 0" />
+    <color id="6" rgb="102 178 255" />
+    <color id="7" rgb="255 153 255" />
+  </plot>
+</plots>
