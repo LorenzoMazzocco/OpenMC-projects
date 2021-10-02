@@ -16,27 +16,52 @@ import math
 
 #=========================FUNCTIONS=============================
 
-def plot_radially(radial_data, xlabel, ylabel, title, diag=False, alpha=0.5):
+def mesh_plot(mesh_data,title,filename, reduced=False):
+    if reduced:
+        mesh_dim=red_mesh_dimension
+    else:
+        mesh_dim=mesh_dimension
+    plt.imshow(mesh_data, cmap='jet', origin='lower', extent = [-pitch/2,pitch/2,-pitch/2,pitch/2])
+    plt.suptitle(title,fontsize=14)
+    plt.title('mesh size: [{},{}]   |   neutrons/batch: {}'.format(mesh_dim,mesh_dim,neutrons_per_batch),fontsize=10)
+    plt.xlabel('Distance from center [cm]')
+    plt.ylabel('Distance from center [cm]')
+    plt.colorbar()
+    plt.savefig("images/plots/{}.png".format(filename), dpi=700)
+    plt.clf()
+
+
+def plot_radially(radial_data, ylabel, title, filename, diag=False, alpha=0.5):
     geom_image = mpimg.imread('images/geometry/side_view.ppm')
+    pitch_dim = pitch
+    mesh_dim = mesh_dimension
+    directory = 'horizontal'
     if diag:
         geom_image = mpimg.imread('images/geometry/side_diagonal_view.ppm')
+        pitch_dim = diagonal_pitch
+        directory = 'diagonal'
     fig, axs = plt.subplots(2,1, sharex=True, sharey=True, figsize=(15,10))
-    fig.suptitle('{}'.format(title))
-    axs[1].imshow(geom_image, alpha=alpha, origin='lower', extent=[-pitch/2,pitch/2,0,1.2*np.amax(radial_data)])
-    axs[0].plot(np.linspace(-pitch/2,pitch/2,mesh_dimension),radial_data, 'r-', linewidth=2)
-    axs[1].plot(np.linspace(-pitch/2,pitch/2,mesh_dimension), radial_data, 'r-', linewidth=3)
+    fig.suptitle('{}'.format(title), fontsize=19)
+    axs[0].set_title('mesh size: [{},{}]   |   neutrons/batch: {}'.format(mesh_dim,mesh_dim,neutrons_per_batch),fontsize=14, pad=30)
+    axs[1].imshow(geom_image, alpha=alpha, origin='lower', extent=[-pitch_dim/2,pitch_dim/2,0,1.2*np.amax(radial_data)])
+    axs[0].plot(np.linspace(-pitch_dim/2,pitch_dim/2,mesh_dim),radial_data, 'r-', linewidth=2)
+    axs[1].plot(np.linspace(-pitch_dim/2,pitch_dim/2,mesh_dim), radial_data, 'r-', linewidth=3)
     axs[1].xaxis.tick_top()
     axs[1].xaxis.set_label_position('top')
-    axs[1].set_xlabel('{}'.format(xlabel))
+    axs[1].set_xlabel('Radial Distance [cm]')
     axs[1].set_aspect('auto')
     for ax in axs:
         ax.set_ylabel('{}'.format(ylabel))
+
+    plt.savefig("images/radial_plots/{}/{}.png".format(directory,filename), dpi=700)
+    plt.clf()
 
 
 
 pitch = 1.0730001
 diagonal_pitch = math.sqrt(2)*pitch
 mesh_dimension = 300
+neutrons_per_batch = 2000
 
 #=========================DEFINE MATERIALS==========================
 
@@ -210,7 +235,7 @@ settings = openmc.Settings()
 settings.source = source
 settings.batches = 100
 settings.inactive = 20
-settings.particles = 2000
+settings.particles = neutrons_per_batch
 
 settings.export_to_xml()
 
@@ -251,7 +276,7 @@ tallies.append(t_mesh)
 tallies.export_to_xml()
 
 #==================== RUN SIMULATION ===========================
-openmc.run()
+#openmc.run()
 
 #======================== POST PROCESSING ===========================
 
@@ -270,45 +295,26 @@ plt.clf()
 
 
 tally_mesh = sp.get_tally(name='mesh_tally')
+mesh_cell_volume = (pitch/mesh_dimension)**2
 #fission reaction rate
 fission_rr = tally_mesh.get_slice(scores=['fission'])
 fission_rr.mean.shape = (mesh_dimension,mesh_dimension)
-
-plt.imshow(fission_rr.mean, cmap='jet')
-plt.title('Fission Reaction Rate [reaction/s]', pad=20)
-plt.colorbar()
-plt.savefig("images/plots/fission_RR.png", dpi=700)
-plt.clf()
+mesh_plot(fission_rr.mean/mesh_cell_volume, 'Fission reaction rate [1/cm3-src]', 'fission_rr')
 
 #scattering reaction rate
 elastic_rr = tally_mesh.get_slice(scores=['(n,elastic)'])
 elastic_rr.mean.shape = (mesh_dimension,mesh_dimension)
-
-plt.imshow(elastic_rr.mean, cmap='jet')
-plt.title('Elastic Scattering Reaction Rate [reaction/s]', pad=20)
-plt.colorbar()
-plt.savefig("images/plots/elastic_RR.png", dpi=700)
-plt.clf()
+mesh_plot(elastic_rr.mean/mesh_cell_volume, 'Elastic Scattering Reaction Rate [1/cm3-src]', 'elastic_rr')
 
 #capture reaction rate
 capture_rr = tally_mesh.get_slice(scores=['(n,gamma)'])
 capture_rr.mean.shape = (mesh_dimension,mesh_dimension)
-
-plt.imshow(capture_rr.mean, cmap='jet')
-plt.title('Radiative Capture Reaction Rate [reaction/s]', pad=20)
-plt.colorbar()
-plt.savefig("images/plots/capture_RR.png", dpi=700)
-plt.clf()
+mesh_plot(capture_rr.mean/mesh_cell_volume, 'Radiative Capture Reaction Rate [1/cm3-src]', 'capture_rr')
 
 #recoverable energy
 rec_ene = tally_mesh.get_slice(scores=['fission-q-recoverable'])
 rec_ene.mean.shape = (mesh_dimension,mesh_dimension)
-
-plt.imshow(rec_ene.mean, cmap='jet')
-plt.title('Recoverable energy [ev/src]', pad=20)
-plt.colorbar()
-plt.savefig("images/plots/recoverable_energy.png", dpi=700)
-plt.clf()
+mesh_plot(rec_ene.mean/mesh_cell_volume, 'Recoverable energy [eV/cm3-src]', 'recoverable_energy')
 
 
 #RADIAL_ORIZONTAL
@@ -319,23 +325,14 @@ radial_horiz_elastic = elastic_rr.mean[radial_index,:]
 radial_horiz_recene = rec_ene.mean[radial_index,:]
 
 
-plot_radially(radial_horiz_fission, title='Radial horizontal distribution of fission reaction rate', xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/horizontal/fission_rr.png", dpi=700)
-plt.clf()
+plot_radially(radial_horiz_fission/mesh_cell_volume, title='Radial horizontal distribution of fission reaction rate', ylabel='Fission reaction rate [1/cm3-src]', filename='fission_rr')
 
+plot_radially(radial_horiz_capture/mesh_cell_volume, title='Radial horizontal distribution of (n,gamma) reaction rate', ylabel='(n,gamma) reaction rate [1/cm3-src]', filename='capture_rr')
 
-plot_radially(radial_horiz_capture, title='Radial horizontal distribution of (n,gamma) reaction rate', xlabel='Radial Distance [cm]', ylabel='(n,gamma) reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/horizontal/capture_rr.png", dpi=700)
-plt.clf()
+plot_radially(radial_horiz_elastic/mesh_cell_volume, title='Radial horizontal distribution of elastic scattering reaction rate', ylabel='Elastic Scattering reaction rate [1/cm3-src]', filename='elastic_rr')
 
+plot_radially(radial_horiz_recene/mesh_cell_volume, title='Radial horizontal distribution of recoverable energy', ylabel='Recoverable energy [eV/cm3-src]', filename='recoverable_energy')
 
-plot_radially(radial_horiz_elastic, title='Radial horizontal distribution of elastic scattering reaction rate', xlabel='Radial Distance [cm]', ylabel='Elastic Scattering reaction rate [1/s-src]')
-plt.savefig("images/radial_plots/horizontal/elastic_rr.png", dpi=700)
-plt.clf()
-
-plot_radially(radial_horiz_recene, title='Radial horizontal distribution of recoverable energy', xlabel='Radial Distance [cm]', ylabel='Recoverable energy [eV/src]')
-plt.savefig("images/radial_plots/horizontal/recoverable_energy_rr.png", dpi=700)
-plt.clf()
 
 #RADIAL_DIAGONAL
 radial_diag_fission = np.diagonal(fission_rr.mean)
@@ -344,20 +341,10 @@ radial_diag_elastic = np.diagonal(elastic_rr.mean)
 radial_diag_recene = np.diagonal(rec_ene.mean)
 
 
-plot_radially(radial_diag_fission, title='Radial diagonal distribution of fission reaction rate', xlabel='Radial Distance [cm]', ylabel='Fission reaction rate [1/s-src]', diag=True)
-plt.savefig("images/radial_plots/diagonal/fission_rr_diag.png", dpi=700)
-plt.clf()
+plot_radially(radial_diag_fission/mesh_cell_volume, title='Radial diagonal distribution of fission reaction rate', ylabel='Fission reaction rate [1/cm3-src]', diag=True, filename='fission_rr')
 
+plot_radially(radial_diag_capture/mesh_cell_volume, title='Radial diagonal distribution of (n,gamma) reaction rate', ylabel='(n,gamma) reaction rate [1/cm3-src]', diag=True, filename='capture_rr')
 
-plot_radially(radial_diag_capture, title='Radial diagonal distribution of (n,gamma) reaction rate', xlabel='Radial Distance [cm]', ylabel='(n,gamma) reaction rate [1/s-src]', diag=True)
-plt.savefig("images/radial_plots/diagonal/capture_rr_diag.png", dpi=700)
-plt.clf()
+plot_radially(radial_diag_elastic/mesh_cell_volume, title='Radial diagonal distribution of elastic scattering reaction rate', ylabel='Elastic Scattering reaction rate [1/cm3-src]', diag=True, filename='elastic_rr')
 
-
-plot_radially(radial_diag_elastic, title='Radial diagonal distribution of elastic scattering reaction rate', xlabel='Radial Distance [cm]', ylabel='Elastic Scattering reaction rate [1/s-src]', diag=True)
-plt.savefig("images/radial_plots/diagonal/elastic_rr_diag.png", dpi=700)
-plt.clf()
-
-plot_radially(radial_diag_recene, title='Radial diagonal distribution of recoverable energy', xlabel='Radial Distance [cm]', ylabel='Recoverable energy [eV/src]', diag=True)
-plt.savefig("images/radial_plots/diagonal/recoverable_energy_rr_diag.png", dpi=700)
-plt.clf()
+plot_radially(radial_diag_recene/mesh_cell_volume, title='Radial diagonal distribution of recoverable energy', ylabel='Recoverable energy [eV/cm3-src]', diag=True, filename='recoverable_energy')
