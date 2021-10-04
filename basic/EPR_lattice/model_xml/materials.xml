@@ -30,16 +30,16 @@
     <nuclide ao="2.998863" name="O16" />
     <nuclide ao="0.001137" name="O17" />
   </material>
-  <material id="4" name="MT5">
+  <material id="4" name="M5">
     <density units="g/cc" value="6.55" />
-    <nuclide name="Zr90" wo="0.39297241070319155" />
-    <nuclide name="Zr91" wo="0.08665187777726027" />
-    <nuclide name="Zr92" wo="0.13390528632051277" />
-    <nuclide name="Zr94" wo="0.13865605865235217" />
-    <nuclide name="Zr96" wo="0.02281436654668344" />
-    <nuclide name="Nb93" wo="0.1" />
-    <nuclide name="O16" wo="0.1249496518284908" />
-    <nuclide name="O17" wo="5.034817150919744e-05" />
+    <nuclide name="Zr90" wo="0.5013567368810073" />
+    <nuclide name="Zr91" wo="0.1105510247126014" />
+    <nuclide name="Zr92" wo="0.1708372281927832" />
+    <nuclide name="Zr94" wo="0.176898294183888" />
+    <nuclide name="Zr96" wo="0.029106716029720325" />
+    <nuclide name="Nb93" wo="0.01" />
+    <nuclide name="O16" wo="0.001249496518284908" />
+    <nuclide name="O17" wo="5.034817150919744e-07" />
   </material>
   <material id="5" name="helium">
     <density units="g/cc" value="0.00222185" />

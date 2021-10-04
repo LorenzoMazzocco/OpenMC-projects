@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plots>
-  <plot basis="xy" color_by="material" filename="images/config_20_BA/geometry/top_view_partial" id="4" type="slice">
+  <plot basis="xy" color_by="material" filename="images/config_8_BA/geometry/top_view_partial" id="4" type="slice">
     <origin>5.355 5.355 0.0</origin>
     <width>10.71 10.71</width>
     <pixels>1500 1500</pixels>
@@ -10,7 +10,7 @@
     <color id="6" rgb="102 178 255" />
     <color id="7" rgb="255 153 255" />
   </plot>
-  <plot basis="xz" color_by="material" filename="images/config_20_BA/geometry/side_view_partial" id="5" type="slice">
+  <plot basis="xz" color_by="material" filename="images/config_8_BA/geometry/side_view_partial" id="5" type="slice">
     <origin>5.355 0 0.0</origin>
     <width>10.71 10.71</width>
     <pixels>1500 1500</pixels>

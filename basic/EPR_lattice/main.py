@@ -265,7 +265,7 @@ config_8 = {'lattice':
             [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
             'name': 'config_8_BA'}
 
-configuration = config_20
+configuration = config_8
 
 #CREATE THE LATTICE
 
@@ -477,7 +477,7 @@ mesh_cell_volume = ((assembly_side/2)/mesh_dimension)**2
 flux = tally_mesh.get_slice(scores=['flux'])
 flux.mean.shape = (mesh_dimension,mesh_dimension)
 flux_rec = reconstruct_complete_mesh(flux.mean)
-mesh_plot(flux_rec/mesh_cell_volume, 'Fission reaction rate [1/cm3-src]', 'flux')
+mesh_plot(flux_rec/mesh_cell_volume, 'Neutron flux [1/cm2-src]', 'flux')
 
 #fission reaction rate
 fission_rr = tally_mesh.get_slice(scores=['fission'])
