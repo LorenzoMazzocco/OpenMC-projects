@@ -88,7 +88,7 @@ It is evident that the gadolinium burnable absorbers have a strong influence on 
 </p>
 <br></br>
 
-### Influence of control rod channels neutron moderation and fission
+### Influence of control rod channels on neutron moderation and fission
 From the elastic scattering reaction rate mesh plot it seems that inside the water filled control rods and instrumentation channels the number of scattering events is greater than in the other areas of the geometry filled with water. This is because of the great quantity of moderator present inside the channels and the distance from any source of neutron absorber. The radial plot confirms this:
 
 <p align="center">
