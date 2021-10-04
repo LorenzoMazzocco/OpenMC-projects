@@ -114,12 +114,12 @@ Gd2O3.add_element('Gd', 2.0)
 Gd2O3.add_element('O', 3.0)
 Gd2O3.set_density('g/cc', 7.41)
 
-# cladding alloy (MT5)
-MT5 = openmc.Material(name='MT5')
-MT5.add_element('Zr', 0.775, percent_type='wo')
-MT5.add_element('Nb', 0.1, percent_type='wo')
-MT5.add_element('O', 0.125, percent_type='wo')
-MT5.set_density('g/cc', 6.55)
+# cladding alloy (M5)
+M5 = openmc.Material(name='MT5')
+M5.add_element('Zr', 0.98875, percent_type='wo')
+M5.add_element('Nb', 0.01, percent_type='wo')
+M5.add_element('O', 0.00125, percent_type='wo')
+M5.set_density('g/cc', 6.55)
 
 # helium
 He = openmc.Material(name='helium')
@@ -138,7 +138,7 @@ fuel_BA = openmc.Material.mix_materials([UO2_BA, Gd2O3], [0.92, 0.08], 'wo', nam
 
 
 #EXPORT
-materials = openmc.Materials([UO2_BA, Gd2O3, MT5, He, H2O, fuel_BA, fuel_No_BA])
+materials = openmc.Materials([UO2_BA, Gd2O3, M5, He, H2O, fuel_BA, fuel_No_BA])
 materials.export_to_xml()
 
 
@@ -159,7 +159,7 @@ channel_clad_ir = openmc.ZCylinder(r=channel_clad_ir)
 #FUEL_BA PIN UNIVERSE
 fuel_BA_cell = openmc.Cell(fill=fuel_BA, region=-pin_fuel_or)
 gap_BA_cell = openmc.Cell(fill=He, region= +pin_fuel_or & -pin_clad_ir)
-clad_BA_cell = openmc.Cell(fill=MT5, region= +pin_clad_ir & -pin_clad_or)
+clad_BA_cell = openmc.Cell(fill=M5, region= +pin_clad_ir & -pin_clad_or)
 water_BA_cell = openmc.Cell(fill=H2O, region= +pin_clad_or)
 
 b = openmc.Universe(cells=[fuel_BA_cell, gap_BA_cell, clad_BA_cell, water_BA_cell])
@@ -167,14 +167,14 @@ b = openmc.Universe(cells=[fuel_BA_cell, gap_BA_cell, clad_BA_cell, water_BA_cel
 #FUEL_No_BA PIN UNIVERSE
 fuel_No_BA_cell = openmc.Cell(fill=fuel_No_BA, region=-pin_fuel_or)
 gap_No_BA_cell = openmc.Cell(fill=He, region= +pin_fuel_or & -pin_clad_ir)
-clad_No_BA_cell = openmc.Cell(fill=MT5, region= +pin_clad_ir & -pin_clad_or)
+clad_No_BA_cell = openmc.Cell(fill=M5, region= +pin_clad_ir & -pin_clad_or)
 water_No_BA_cell = openmc.Cell(fill=H2O, region= +pin_clad_or)
 
 f = openmc.Universe(cells=[fuel_No_BA_cell, gap_No_BA_cell, clad_No_BA_cell, water_No_BA_cell])
 
 #CHANNEL UNIVERSE
 in_channel_cell = openmc.Cell(fill=H2O, region=-channel_clad_ir)
-channel_clad_cell = openmc.Cell(fill=MT5, region= +channel_clad_ir & -channel_clad_or)
+channel_clad_cell = openmc.Cell(fill=M5, region= +channel_clad_ir & -channel_clad_or)
 out_channel_cell = openmc.Cell(fill=H2O, region=+channel_clad_or)
 
 c = openmc.Universe(cells=[in_channel_cell, channel_clad_cell, out_channel_cell])
@@ -295,7 +295,7 @@ geom_plot_top.origin = (0., 0., 0.)
 geom_plot_top.width = (assembly_side, assembly_side)
 geom_plot_top.pixels = (1500, 1500)
 geom_plot_top.color_by = 'material'
-geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', M5:'grey', H2O:(102,178,255)}
 geom_plot_top.filename = 'images/{}/geometry/top_view_complete'.format(configuration['name'])
 
 #side view
@@ -305,7 +305,7 @@ geom_plot_side.origin = (0., 0., 0.)
 geom_plot_side.width = (assembly_side, assembly_side)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
-geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', M5:'grey', H2O:(102,178,255)}
 geom_plot_side.filename = 'images/{}/geometry/side_view_complete'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_top, geom_plot_side])
@@ -338,7 +338,7 @@ geom_plot_side.origin = (17*pitch_diag/4, 0., 0.)
 geom_plot_side.width = (17*pitch_diag/2, 3*pitch)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
-geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', M5:'grey', H2O:(102,178,255)}
 geom_plot_side.filename = 'images/{}/geometry/side_view_diag'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_side])
@@ -364,7 +364,7 @@ geom_plot_top.origin = (assembly_side/4, assembly_side/4, 0.)
 geom_plot_top.width = (assembly_side/2, assembly_side/2)
 geom_plot_top.pixels = (1500, 1500)
 geom_plot_top.color_by = 'material'
-geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_top.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', M5:'grey', H2O:(102,178,255)}
 geom_plot_top.filename = 'images/{}/geometry/top_view_partial'.format(configuration['name'])
 
 #side view
@@ -374,7 +374,7 @@ geom_plot_side.origin = (assembly_side/4, 0, 0.)
 geom_plot_side.width = (assembly_side/2, assembly_side/2)
 geom_plot_side.pixels = (1500, 1500)
 geom_plot_side.color_by = 'material'
-geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', MT5:'grey', H2O:(102,178,255)}
+geom_plot_side.colors = {fuel_No_BA: (255,255,153), fuel_BA:(255,153,255), He:'green', M5:'grey', H2O:(102,178,255)}
 geom_plot_side.filename = 'images/{}/geometry/side_view_partial'.format(configuration['name'])
 
 plots = openmc.Plots([geom_plot_top, geom_plot_side])
