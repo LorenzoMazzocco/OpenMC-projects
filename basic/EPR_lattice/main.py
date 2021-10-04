@@ -115,7 +115,7 @@ Gd2O3.add_element('O', 3.0)
 Gd2O3.set_density('g/cc', 7.41)
 
 # cladding alloy (M5)
-M5 = openmc.Material(name='MT5')
+M5 = openmc.Material(name='M5')
 M5.add_element('Zr', 0.98875, percent_type='wo')
 M5.add_element('Nb', 0.01, percent_type='wo')
 M5.add_element('O', 0.00125, percent_type='wo')
