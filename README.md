@@ -1,6 +1,6 @@
 # OpenMC-projects
 
-The purpose of this repository is to host the code and the results of personal projects on neutronics simulation performed using the Monte Carlo code [OpenMC](https://openmc.org/).
+The purpose of this repository is to host the code and the results of personal projects on neutronic simulations performed using the Monte Carlo code [OpenMC](https://openmc.org/).
 <br></br>
 
 The **structure** of the repository is the following:
