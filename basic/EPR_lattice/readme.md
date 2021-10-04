@@ -27,10 +27,10 @@ The model presents 3 different types of pins:
 The BA (Burnable Absorber) rods can change in number. We can have 4 different configurations, in order 8 BA, 12 BA, 16 BA, 20 BA
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/36040421/135927626-10d8c1d2-753a-4305-90b6-be0676913de1.png" width="250" />
-  <img src="https://user-images.githubusercontent.com/36040421/135927633-a08d1e9f-d4d2-4d5e-88bf-ea7b073b3f6d.png" width="250" /> 
-  <img src="https://user-images.githubusercontent.com/36040421/135927637-788702c2-427f-4127-9aa3-85bb50cc4383.png" width="250" />
-  <img src="https://user-images.githubusercontent.com/36040421/135927642-7e3fe04d-4d90-4bb4-9979-eb607fd5df92.png" width="250" />
+  <img src="https://user-images.githubusercontent.com/36040421/135927626-10d8c1d2-753a-4305-90b6-be0676913de1.png" width="220" />
+  <img src="https://user-images.githubusercontent.com/36040421/135927633-a08d1e9f-d4d2-4d5e-88bf-ea7b073b3f6d.png" width="220" /> 
+  <img src="https://user-images.githubusercontent.com/36040421/135927637-788702c2-427f-4127-9aa3-85bb50cc4383.png" width="220" />
+  <img src="https://user-images.githubusercontent.com/36040421/135927642-7e3fe04d-4d90-4bb4-9979-eb607fd5df92.png" width="220" />
 </p>
 
 The modeled configurations are taken from the [original EPR core design](https://github.com/LorenzoMazzocco/OpenMC-projects/files/7281364/EPR.core.design.pdf), as shown in the following 
