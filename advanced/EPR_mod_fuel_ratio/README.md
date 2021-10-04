@@ -1,4 +1,4 @@
-# Moderator to fuel ratio effect on k-inf 
+# Moderator-to-fuel ratio effect on k-inf 
 
 The main goal of this project is to investigate the dependency of k-inf for an [EPR assembly lattice](https://github.com/LorenzoMazzocco/OpenMC-projects/files/7280552/EPR.core.design.pdf) on the ratio of moderator over fuel material in volume.\
 \
