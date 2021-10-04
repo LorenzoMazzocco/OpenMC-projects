@@ -1,4 +1,5 @@
 import openmc
+import shutil
 
 
 class EPR_assembly():
@@ -31,7 +32,7 @@ class EPR_assembly():
             self.geometry = self.complete_geometry
         else:
             self.partial_geometry.export_to_xml(path='geometry.xml')
-            self.geometry = self.complete_geometry
+            self.geometry = self.partial_geometry
 
 
     #############################################################################################
@@ -292,6 +293,7 @@ class EPR_assembly():
         plots = openmc.Plots([geom_plot_top, geom_plot_side])
         plots.export_to_xml(path='plots.xml')
         openmc.plot_geometry()
+
 
     def set_pitch(self, new_pitch):
         self.pitch = new_pitch
