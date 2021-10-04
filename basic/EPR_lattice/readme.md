@@ -72,7 +72,7 @@ Note that the radial distribution side view can be horizontal (vertical plane cu
 
 >Hint: the radial diagonal distribution plots represent the influence of the BA rods while radial horizontal plots are limited to fuel rods and channels. 
 
-All of the plots can be found in the images folder for every configuration ([8 BA](./images/config_8_BA/) - [12 BA](./images/config_12_BA/) - [16 BA](./images/config_16_BA/) - [20 BA](./images/config_20_BA/)).
+All of the plots can be found in the images folder for each configuration ([8 BA](./images/config_8_BA/) - [12 BA](./images/config_12_BA/) - [16 BA](./images/config_16_BA/) - [20 BA](./images/config_20_BA/)).
 
 <br></br>
 
