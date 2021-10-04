@@ -3,8 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import math
+import shutil
 
-#================================================================ FUNCTIONS =============================
+##################################################################
+#                           FUNCTIONS                            #
+##################################################################
 
 def mesh_plot(mesh_data,title,filename, reduced=False):
     if reduced:
@@ -58,7 +61,9 @@ def reconstruct_complete_mesh(up_right):
 
 
 
-#==================================================== VARIABLES =======================
+##################################################################
+#                         MAIN VARIABLES                         #
+##################################################################
 
 #fuel variables
 No_BA_fuel_enrichment = 3.0
@@ -87,7 +92,9 @@ red_energies_dimension = 10
 neutrons_per_batch = 15000
 
 
-#======================================================================= DEFINE MATERIALS =======================
+##################################################################
+#                      DEFINE MATERIALS                          #
+##################################################################
 
 # uranium dioxide BA
 UO2_BA = openmc.Material(name='UO2_BA')
@@ -136,7 +143,9 @@ materials.export_to_xml()
 
 
 
-#======================================================================= DEFINE GEOMETRY ====================================
+##################################################################
+#                       DEFINE GEOMETRY                          #
+##################################################################
 
 #pin surfaces
 pin_fuel_or = openmc.ZCylinder(r=pin_fuel_or)
@@ -375,7 +384,9 @@ openmc.plot_geometry()
 
 
 
-#================================================================ DEFINE SETTINGS ===========================
+##################################################################
+#                         DEFINE SETTINGS                        #
+##################################################################
 
 point = openmc.stats.Point((assembly_side/4, assembly_side/4, 0))
 source = openmc.Source(space=point)
@@ -389,7 +400,11 @@ settings.verbosity = 7
 
 settings.export_to_xml()
 
-#================================================================ DEFINE TALLIES ===========================
+
+##################################################################
+#                         DEFINE TALLIES                         #
+##################################################################
+
 #FILTERS
 #energy
 energies = np.logspace(np.log10(1e-3), np.log10(20.0e6), energies_dimension+1)
@@ -425,10 +440,18 @@ tallies.append(t_mesh)
 
 tallies.export_to_xml()
 
-#================================================================ RUN SIMULATION ===========================
+
+##################################################################
+#                           RUN OPENMC                            #
+##################################################################
+
 openmc.run()
 
-#================================================================ POST PROCESSING ===========================
+
+
+##################################################################
+#                        POST-PROCESSING                         #
+##################################################################
 
 print('\n\nOpening StatePoint file...')
 sp = openmc.StatePoint('statepoint.100.h5')
@@ -524,5 +547,16 @@ plot_radially(radial_diag_elastic/mesh_cell_volume, title='Radial diagonal distr
 
 plot_radially(radial_diag_recene/mesh_cell_volume, title='Radial diagonal distribution of recoverable energy', ylabel='Recoverable energy [eV/src]', diag=True, filename='recoverable_energy')
 
-
 print('\nRadial diag plots completed...')
+
+
+#order main folder
+shutil.move("materials.xml", "model_xml/materials.xml")
+shutil.move("geometry.xml", "model_xml/geometry.xml")
+shutil.move("settings.xml", "model_xml/settings.xml")
+shutil.move("plots.xml", "model_xml/plots.xml")
+shutil.move("tallies.xml", "model_xml/tallies.xml")
+
+shutil.move("statepoint.100.h5", "output/statepoint.100.h5")
+shutil.move("summary.h5", "output/summary.h5")
+shutil.move("tallies.out", "output/tallies.out")
