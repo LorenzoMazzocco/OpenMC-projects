@@ -58,12 +58,12 @@ class EPR_assembly():
         Gd2O3.add_element('O', 3.0)
         Gd2O3.set_density('g/cc', 7.41)
 
-        # cladding alloy (MT5)
-        MT5 = openmc.Material(name='MT5')
-        MT5.add_element('Zr', 0.775, percent_type='wo')
-        MT5.add_element('Nb', 0.1, percent_type='wo')
-        MT5.add_element('O', 0.125, percent_type='wo')
-        MT5.set_density('g/cc', 6.55)
+        # cladding alloy (M5)
+        M5 = openmc.Material(name='M5')
+        M5.add_element('Zr', 0.98875, percent_type='wo')
+        M5.add_element('Nb', 0.01, percent_type='wo')
+        M5.add_element('O', 0.00125, percent_type='wo')
+        M5.set_density('g/cc', 6.55)
 
         # helium
         He = openmc.Material(name='helium')
@@ -81,13 +81,13 @@ class EPR_assembly():
         fuel_BA = openmc.Material.mix_materials([UO2_BA, Gd2O3], [1-0.01*self.BA_percentage, 0.01*self.BA_percentage], 'wo', name='fuel_BA')
 
         #openmc object to export
-        self.materials = openmc.Materials([UO2_BA, Gd2O3, MT5, He, H2O, fuel_BA, fuel_No_BA])
+        self.materials = openmc.Materials([UO2_BA, Gd2O3, M5, He, H2O, fuel_BA, fuel_No_BA])
         self.materials.export_to_xml(path='materials.xml')
 
         #create material attributes used by create_geometry() method
         self.UO2_BA = UO2_BA
         self.Gd2O3 = Gd2O3
-        self.MT5 = MT5
+        self.M5 = M5
         self.He = He
         self.H2O = H2O
         self.fuel_BA = fuel_BA
@@ -121,7 +121,7 @@ class EPR_assembly():
         #FUEL_BA PIN UNIVERSE
         fuel_BA_cell = openmc.Cell(fill=self.fuel_BA, region=-pin_fuel_or)
         gap_BA_cell = openmc.Cell(fill=self.He, region= +pin_fuel_or & -pin_clad_ir)
-        clad_BA_cell = openmc.Cell(fill=self.MT5, region= +pin_clad_ir & -pin_clad_or)
+        clad_BA_cell = openmc.Cell(fill=self.M5, region= +pin_clad_ir & -pin_clad_or)
         water_BA_cell = openmc.Cell(fill=self.H2O, region= +pin_clad_or)
 
         b = openmc.Universe(cells=[fuel_BA_cell, gap_BA_cell, clad_BA_cell, water_BA_cell])
@@ -129,14 +129,14 @@ class EPR_assembly():
         #FUEL_No_BA PIN UNIVERSE
         fuel_No_BA_cell = openmc.Cell(fill=self.fuel_No_BA, region=-pin_fuel_or)
         gap_No_BA_cell = openmc.Cell(fill=self.He, region= +pin_fuel_or & -pin_clad_ir)
-        clad_No_BA_cell = openmc.Cell(fill=self.MT5, region= +pin_clad_ir & -pin_clad_or)
+        clad_No_BA_cell = openmc.Cell(fill=self.M5, region= +pin_clad_ir & -pin_clad_or)
         water_No_BA_cell = openmc.Cell(fill=self.H2O, region= +pin_clad_or)
 
         f = openmc.Universe(cells=[fuel_No_BA_cell, gap_No_BA_cell, clad_No_BA_cell, water_No_BA_cell])
 
         #CHANNEL UNIVERSE
         in_channel_cell = openmc.Cell(fill=self.H2O, region=-channel_clad_ir)
-        channel_clad_cell = openmc.Cell(fill=self.MT5, region= +channel_clad_ir & -channel_clad_or)
+        channel_clad_cell = openmc.Cell(fill=self.M5, region= +channel_clad_ir & -channel_clad_or)
         out_channel_cell = openmc.Cell(fill=self.H2O, region=+channel_clad_or)
 
         c = openmc.Universe(cells=[in_channel_cell, channel_clad_cell, out_channel_cell])
@@ -277,7 +277,7 @@ class EPR_assembly():
         geom_plot_top.width = (17*self.pitch, 17*self.pitch)
         geom_plot_top.pixels = (1500, 1500)
         geom_plot_top.color_by = 'material'
-        geom_plot_top.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.MT5:'grey', self.H2O:(102,178,255)}
+        geom_plot_top.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.M5:'grey', self.H2O:(102,178,255)}
         geom_plot_top.filename = 'model_plots/top_view'
 
         #side view
@@ -287,7 +287,7 @@ class EPR_assembly():
         geom_plot_side.width = (17*self.pitch, 17*self.pitch)
         geom_plot_side.pixels = (1500, 1500)
         geom_plot_side.color_by = 'material'
-        geom_plot_side.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.MT5:'grey', self.H2O:(102,178,255)}
+        geom_plot_side.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.M5:'grey', self.H2O:(102,178,255)}
         geom_plot_side.filename = 'model_plots/side_view'
 
         plots = openmc.Plots([geom_plot_top, geom_plot_side])
