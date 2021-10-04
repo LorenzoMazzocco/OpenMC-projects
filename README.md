@@ -10,7 +10,7 @@ The structure of the repository is the following:
 |[SFR pincell](./basics/SFR_pincell/)|                                                             |
 |[EPR lattice](./basics/EPR_lattice/)|                                                             |
 
-The main distrinction is between **basic** and **advanced**.\
+The main distinction is between **basic** and **advanced** projects.\
 Projects are classified as **ADVANCED** if one of the following conditions is met:
 - the model is constructed using an ad hoc template class previously coded
 - they include depletion calculations
