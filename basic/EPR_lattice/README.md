@@ -10,7 +10,7 @@ The model presents 3 different types of pins:
 - Fuel rods (yellow)
 - Gd burnable absorber integral rods (pink)
 - Instrumentation and control rods channels
-
+<br></br>
 >**FUNDAMENTAL GEOMETRY PARAMETERS**
 >- Fuel pellet outer radius: 0.3975 cm
 >- Cladding inner radius: 0.4125 cm
@@ -22,8 +22,8 @@ The model presents 3 different types of pins:
 >- Fuel: UO2 (3.0% wt enrichment) (yellow)
 >- BA: UO2-Gd2O3 (UO2 0.25% wt enr. - 8% wt Gd2O3) (pink)
 >- Cladding: M5 alloy (Zr 98.875 %wt - Nb 1 %wt - O 0.125 %wt) (grey)
-<br></br>
 
+<br></br>
 The BA (Burnable Absorber) rods can change in number. We can have 4 different configurations, in order 8 BA, 12 BA, 16 BA, 20 BA
 
 <p align="center">
@@ -70,7 +70,7 @@ Note that the radial distribution side view can be horizontal (vertical plane cu
 <br></br>
 
 
->Hint: the radial diagonal distribution plots represent the influence of the BA rods while radial horizontal plots are limited to fuel rods and channels. 
+>Hint: the radial diagonal distribution plots give precious information on the influence of the BA rods while radial horizontal plots are limited to fuel rods and channels. 
 
 All of the plots can be found in the images folder for each configuration ([8 BA](./images/config_8_BA/) - [12 BA](./images/config_12_BA/) - [16 BA](./images/config_16_BA/) - [20 BA](./images/config_20_BA/)).
 
