@@ -76,7 +76,7 @@ Therefore the hypotesis that comes up naturally is that the higher fission react
 tallies the neutron spectrum (10 energy levels) and computes the mean energy of the neutrons in that region of the model. We can then plot the results in a mesh plot and on the side view to observe the radial distribution:
 
 <p align='center'>
-<img src="https://user-images.githubusercontent.com/36040421/136120973-1edd97df-a29c-41f6-a032-4e6f5a82fd36.png" width="500" /> 
+<img src="https://user-images.githubusercontent.com/36040421/136120973-1edd97df-a29c-41f6-a032-4e6f5a82fd36.png" width="600" /> 
 <br></br>
 <img src="https://user-images.githubusercontent.com/36040421/136120967-7d5dfa9f-63d4-4a84-85f4-07aadb327276.png" width="600" /> 
 <p/>
