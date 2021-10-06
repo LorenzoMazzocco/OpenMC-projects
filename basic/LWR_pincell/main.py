@@ -1,18 +1,9 @@
-"""
-Lo scopo di questo progetto è la simulazione 2D di una semplice pincell di un LWR.
-Le informazioni da estrarre sono:
-    - spettro di flusso neutronico totale (grafico flux/energy)
-    - tasso di reazione fissione (plot 2D, grafico del tasso radiale sotto la geometria)
-    - tasso di reazione cattura (plot 2D, grafico del tasso radiale sotto la geometria)
-    - tasso di reazione scattering elastico (plot 2D, grafico del tasso radiale sotto la geometria)
-    - energia media dei neutroni (plot 2D, grafico radiale)
-"""
-
 import openmc
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import math
+import shutil
 
 #================================================================ FUNCTIONS =============================
 
@@ -332,3 +323,15 @@ mesh_plot(mean_energy_mesh, 'Mean neutron energy [eV]', 'mean_neutron_energy', r
 
 radial_index=int((red_mesh_dimension/2)-1)
 plot_radially(mean_energy_mesh[radial_index,:], title='Mean neutron energy [eV]', ylabel='Mean neutron energy [eV]', filename='mean_neutron_energy')
+
+
+#order main folder
+shutil.move("materials.xml", "model_xml/materials.xml")
+shutil.move("geometry.xml", "model_xml/geometry.xml")
+shutil.move("settings.xml", "model_xml/settings.xml")
+shutil.move("plots.xml", "model_xml/plots.xml")
+shutil.move("tallies.xml", "model_xml/tallies.xml")
+
+shutil.move("statepoint.100.h5", "output/statepoint.100.h5")
+shutil.move("summary.h5", "output/summary.h5")
+shutil.move("tallies.out", "output/tallies.out")
