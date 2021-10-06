@@ -67,11 +67,20 @@ Following are examples for each plot type:
 ### Harder neutron flux spectrum
 
 Since this model is part of a fast reactor no moderator is present. We can therefore verify that the distribution of neutrons energies in the geometry considered is 
-significantly predominant at high energies.
+significantly leaning towards high energies.
 
 <p align='center'>
-<img src="" width="600" /> 
+<img src="https://user-images.githubusercontent.com/36040421/136270474-d5ec76ab-183e-4396-95e9-4687ce8a86e1.png" width="600" /> 
 <p/>
 <br></br>
+
+The results obtained can be compared with a light water moderated reactor such as the EPR:
+
+<p align='center'>
+<img src="https://user-images.githubusercontent.com/36040421/136270757-a200380e-965f-4fce-875d-00a188e6973b.png" width="600" /> 
+<p/>
+<br></br>
+
+
 
 >Milan (IT), october 2021
