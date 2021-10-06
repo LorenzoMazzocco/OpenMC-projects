@@ -45,10 +45,14 @@ The results are represented in 2 different ways:
 Following are examples for each plot type:
 
 **Mesh Plot**\
+<a href='https://github.com/LorenzoMazzocco/OpenMC-projects/tree/main/basic/LWR_pincell/images/plots' >
 <img src="https://user-images.githubusercontent.com/36040421/136111482-2d89d37e-1881-452b-b0f3-a78df8063712.png" width="400" />
+<a />
 <br></br>
 **Radial**\
+<a href='https://github.com/LorenzoMazzocco/OpenMC-projects/tree/main/basic/LWR_pincell/images/radial_plots' >
 <img src="https://user-images.githubusercontent.com/36040421/136111519-44035d9b-4890-49ec-bb07-d49cad459e19.png" width="500" /> 
+<a />
 <br></br>
 <br></br>
 
