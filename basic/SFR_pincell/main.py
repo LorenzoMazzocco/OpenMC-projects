@@ -1,20 +1,14 @@
-"""
-Lo scopo di questo progetto è la simulazione 2D di una pincell di SFR (modello: https://www.sciencedirect.com/science/article/pii/S0306454913002363#f0015 [OXIDES CORE; inner pincell]).
-Le informazioni da estrarre sono:
-    - spettro di flusso neutronico totale (grafico flux/energy)
-    - tasso di reazione fissione (plot 2D, grafico del tasso radiale sotto la geometria)
-    - tasso di reazione cattura (plot 2D, grafico del tasso radiale sotto la geometria)
-    - tasso di reazione scattering elastico (plot 2D, grafico del tasso radiale sotto la geometria)
-    x energia media dei neutroni (plot 2D, grafico radiale)
-"""
-
 import openmc
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import math
+import shutil
 
-#=========================FUNCTIONS=============================
+
+##################################################################
+#                           FUNCTIONS                            #
+##################################################################
 
 def mesh_plot(mesh_data,title,filename, reduced=False):
     if reduced:
@@ -58,12 +52,20 @@ def plot_radially(radial_data, ylabel, title, filename, diag=False, alpha=0.5):
 
 
 
+##################################################################
+#                         MAIN VARIABLES                         #
+##################################################################
+
 pitch = 1.0730001
 diagonal_pitch = math.sqrt(2)*pitch
 mesh_dimension = 300
 neutrons_per_batch = 2000
 
-#=========================DEFINE MATERIALS==========================
+
+
+##################################################################
+#                      DEFINE MATERIALS                          #
+##################################################################
 
 U235 = openmc.Material(name='U235')
 U235.add_nuclide('U235', 1.0)
@@ -127,12 +129,14 @@ materials_file = openmc.Materials([inner, sodium, clad])
 materials_file.export_to_xml()
 
 
-#=========================DEFINE GEOMETRY==========================
+##################################################################
+#                       DEFINE GEOMETRY                          #
+##################################################################
 
-#=====================================begin mock==================================================================
-#in order to plot the tallies radially we need to include the sodium region. To do that we need to create a
-#mock geometry to plot the side diagonal view THIS PORTION OF THE CODE IS ONLY OF USE TO CREATE THE BACKGROUND
-#PLOT IN THE RADIAL CHARTS. We create the mock geometry, plot it and replace it with the real one.
+#=====================================begin mock geometry==================================================================
+# in order to plot the tallies radially we need to include the sodium region. To do that we need to create a
+# mock geometry to plot the side diagonal view THIS PORTION OF THE CODE IS ONLY OF USE TO CREATE THE BACKGROUND
+# PLOT IN THE RADIAL CHARTS. We create the mock geometry, plot it and replace it with the real one.
 
 fuel_or = openmc.ZCylinder(surface_id=4, r=0.943/2)
 clad_ir = openmc.ZCylinder(surface_id=5, r=0.973/2)
@@ -199,7 +203,9 @@ geometry.export_to_xml()
 
 
 
-#==================== PLOT GEOMETRY ===========================
+##################################################################
+#                        PLOT GEOMETRY                           #
+##################################################################
 
 #top view
 geom_plot_top = openmc.Plot()
@@ -226,7 +232,9 @@ plots.export_to_xml()
 openmc.plot_geometry()
 
 
-#====================DEFINE SETTINGS===========================
+##################################################################
+#                         DEFINE SETTINGS                        #
+##################################################################
 
 point = openmc.stats.Point((0, 0, 0))
 source = openmc.Source(space=point)
@@ -240,7 +248,11 @@ settings.particles = neutrons_per_batch
 settings.export_to_xml()
 
 
-#====================DEFINE TALLIES===========================
+
+##################################################################
+#                         DEFINE TALLIES                         #
+##################################################################
+
 #FILTERS
 #energy
 energies = np.logspace(np.log10(1e-3), np.log10(20.0e6), 501)
@@ -275,10 +287,17 @@ tallies.append(t_mesh)
 
 tallies.export_to_xml()
 
-#==================== RUN SIMULATION ===========================
+
+##################################################################
+#                           RUN OPENMC                            #
+##################################################################
+
 #openmc.run()
 
-#======================== POST PROCESSING ===========================
+
+##################################################################
+#                        POST-PROCESSING                         #
+##################################################################
 
 sp = openmc.StatePoint('statepoint.100.h5')
 
@@ -348,3 +367,19 @@ plot_radially(radial_diag_capture/mesh_cell_volume, title='Radial diagonal distr
 plot_radially(radial_diag_elastic/mesh_cell_volume, title='Radial diagonal distribution of elastic scattering reaction rate', ylabel='Elastic Scattering reaction rate [1/cm3-src]', diag=True, filename='elastic_rr')
 
 plot_radially(radial_diag_recene/mesh_cell_volume, title='Radial diagonal distribution of recoverable energy', ylabel='Recoverable energy [eV/cm3-src]', diag=True, filename='recoverable_energy')
+
+
+
+##################################################################
+#                        ORDER FOLDER                            #
+##################################################################
+
+shutil.move("materials.xml", "model_xml/materials.xml")
+shutil.move("geometry.xml", "model_xml/geometry.xml")
+shutil.move("settings.xml", "model_xml/settings.xml")
+shutil.move("plots.xml", "model_xml/plots.xml")
+shutil.move("tallies.xml", "model_xml/tallies.xml")
+
+shutil.move("statepoint.100.h5", "output/statepoint.100.h5")
+shutil.move("summary.h5", "output/summary.h5")
+shutil.move("tallies.out", "output/tallies.out")

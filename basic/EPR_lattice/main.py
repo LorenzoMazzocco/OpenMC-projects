@@ -550,7 +550,11 @@ plot_radially(radial_diag_recene/mesh_cell_volume, title='Radial diagonal distri
 print('\nRadial diag plots completed...')
 
 
-#order main folder
+
+##################################################################
+#                        ORDER FOLDER                            #
+##################################################################
+
 shutil.move("materials.xml", "model_xml/materials.xml")
 shutil.move("geometry.xml", "model_xml/geometry.xml")
 shutil.move("settings.xml", "model_xml/settings.xml")

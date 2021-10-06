@@ -5,7 +5,9 @@ import matplotlib.image as mpimg
 import math
 import shutil
 
-#================================================================ FUNCTIONS =============================
+##################################################################
+#                           FUNCTIONS                            #
+##################################################################
 
 def mesh_plot(mesh_data,title,filename, reduced=False):
     if reduced:
@@ -46,6 +48,10 @@ def plot_radially(radial_data, ylabel, title, filename, alpha=0.5, reduced=False
     plt.clf()
 
 
+##################################################################
+#                         MAIN VARIABLES                         #
+##################################################################
+
 U_enr = 5.0
 
 r_fuel = 0.39
@@ -61,7 +67,10 @@ red_energies_dimension = 10
 neutrons_per_batch = 5000
 
 
-#================================================================ DEFINE MATERIALS ===========================
+
+##################################################################
+#                      DEFINE MATERIALS                          #
+##################################################################
 
 #uranium_dioxide
 UO2 = openmc.Material(1, "UO2")
@@ -90,7 +99,10 @@ materials = openmc.Materials([UO2, He, Zr, H2O])
 materials.export_to_xml()
 
 
-#================================================================ DEFINE GEOMETRY ===========================
+
+##################################################################
+#                       DEFINE GEOMETRY                          #
+##################################################################
 
 #surfaces
 fuel_outer_radius = openmc.ZCylinder(r=r_fuel)
@@ -134,7 +146,10 @@ geometry = openmc.Geometry()
 geometry.root_universe = root_universe
 geometry.export_to_xml()
 
-#================================================================ PLOT GEOMETRY ===========================
+
+##################################################################
+#                        PLOT GEOMETRY                           #
+##################################################################
 
 #top view
 geom_plot_top = openmc.Plot()
@@ -161,7 +176,9 @@ plots.export_to_xml()
 openmc.plot_geometry()
 
 
-#================================================================ DEFINE SETTINGS ===========================
+##################################################################
+#                         DEFINE SETTINGS                        #
+##################################################################
 
 point = openmc.stats.Point((0, 0, 0))
 source = openmc.Source(space=point)
@@ -175,7 +192,11 @@ settings.particles = neutrons_per_batch
 settings.export_to_xml()
 
 
-#================================================================ DEFINE TALLIES ===========================
+
+##################################################################
+#                         DEFINE TALLIES                         #
+##################################################################
+
 #FILTERS
 #energy
 energies = np.logspace(np.log10(1e-3), np.log10(20.0e6), energies_dimension+1)
@@ -225,10 +246,17 @@ tallies.append(t_flux_ene)
 
 tallies.export_to_xml()
 
-#================================================================ RUN SIMULATION ===========================
+
+##################################################################
+#                           RUN OPENMC                            #
+##################################################################
+
 #openmc.run()
 
-#================================================================ POST PROCESSING ===========================
+
+##################################################################
+#                        POST-PROCESSING                         #
+##################################################################
 
 print('\n\nOpening StatePoint file...')
 sp = openmc.StatePoint('statepoint.100.h5')
@@ -325,7 +353,11 @@ radial_index=int((red_mesh_dimension/2)-1)
 plot_radially(mean_energy_mesh[radial_index,:], title='Mean neutron energy [eV]', ylabel='Mean neutron energy [eV]', filename='mean_neutron_energy')
 
 
-#order main folder
+
+##################################################################
+#                        ORDER FOLDER                            #
+##################################################################
+
 shutil.move("materials.xml", "model_xml/materials.xml")
 shutil.move("geometry.xml", "model_xml/geometry.xml")
 shutil.move("settings.xml", "model_xml/settings.xml")
