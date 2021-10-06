@@ -305,10 +305,10 @@ sp = openmc.StatePoint('statepoint.100.h5')
 tally_tot_flux = sp.get_tally(name='total_flux')
 energy_diff = np.diff(energies)
 
-plt.loglog(energies[:-1], tally_tot_flux.mean[:,0,0])
+plt.loglog(energies[:-1], tally_tot_flux.mean[:,0,0], 'k', linewidth=1)
+plt.grid(b=True, which='both', linewidth=0.5, ls='--')
 plt.xlabel('Energy [eV]')
 plt.ylabel('E*Phi(E) [arbitrary units]')
-plt.grid()
 plt.savefig("images/plots/flux_spectrum.png", dpi=700)
 plt.clf()
 
