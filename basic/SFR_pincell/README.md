@@ -74,7 +74,7 @@ significantly leaning towards high energies.
 <p/>
 <br></br>
 
-The results obtained can be compared with the flux spectrum of a light water moderated reactor such as the EPR:
+The results obtained can be compared with the flux spectrum of a light water moderated reactor such as the EPR (chart obtained in [EPR lattice project](https://github.com/LorenzoMazzocco/OpenMC-projects/tree/main/advanced/EPR_mod_fuel_ratio)):
 
 <p align='center'>
 <img src="https://user-images.githubusercontent.com/36040421/136270757-a200380e-965f-4fce-875d-00a188e6973b.png" width="600" /> 
