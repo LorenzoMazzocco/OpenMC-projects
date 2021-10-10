@@ -27,4 +27,12 @@
     <nuclides>U238</nuclides>
     <scores>(n,gamma)</scores>
   </tally>
+  <tally id="6" name="fuel_hydrogen_tally">
+    <filters>2</filters>
+    <scores>He4-production</scores>
+  </tally>
+  <tally id="7" name="BA_hydrogen_tally">
+    <filters>3</filters>
+    <scores>He4-production</scores>
+  </tally>
 </tallies>

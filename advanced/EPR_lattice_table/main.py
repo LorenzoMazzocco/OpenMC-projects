@@ -21,7 +21,7 @@ config = 20
 complete_model=True
 
 #settings
-neutrons_per_batch=100000
+neutrons_per_batch=10000
 
 
 ############################################
@@ -96,6 +96,7 @@ t_BA_plutonium.nuclides = ['U238']
 t_BA_plutonium.scores = ['(n,gamma)']
 tallies.append(t_BA_plutonium)
 
+
 tallies.export_to_xml()
 
 
@@ -112,7 +113,7 @@ tallies.export_to_xml()
 config = assembly.configurations["{}".format(config)]['lattice'].flatten()
 config = np.reshape([universe.name for universe in config],(17,17))
 
-sp = openmc.StatePoint('output/statepoint.100.h5')
+sp = openmc.StatePoint('statepoint.100.h5')
 
 #extract power data
 fuel_power_tally = sp.get_tally(name='fuel_power_tally')
@@ -127,6 +128,7 @@ fuel_plutonium_mean = fuel_plutonium_tally.get_values(scores=['(n,gamma)'], valu
 
 BA_plutonium_tally = sp.get_tally(name='BA_plutonium_tally')
 BA_plutonium_mean = BA_plutonium_tally.get_values(scores=['(n,gamma)'], value='mean')
+
 
 #normalize tallies
 normalization_tally = sp.get_tally(name='normalization_tally')
@@ -152,6 +154,7 @@ np.place(power_data, BA_mask, BA_power_mean)
 np.place(plutonium_data, fuel_mask, fuel_plutonium_mean)
 np.place(plutonium_data, BA_mask, BA_plutonium_mean)
 
+
 power_data[power_data == 0] = float('nan')
 plutonium_data[plutonium_data == 0] = float('nan')
 
@@ -161,7 +164,6 @@ plutonium_data = np.reshape(plutonium_data*norm_f*239*(60*60)*1000/6.022E23, np.
 
 plots.lattice_plot(power_data, title='Rod Linear Power [W/cm]', filename='power', colormap='autumn')
 plots.lattice_plot(plutonium_data, title='Pu-239 Production [mg/h]', filename='plutonium', colormap='plasma')
-
 
 
 ##################################################################
