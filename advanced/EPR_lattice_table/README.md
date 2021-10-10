@@ -1,8 +1,8 @@
 # LATTICE PLOT TOOL
 
 The goals of this project are:
-- introduce a [plotting tool](images/) to rerpresent information on single pincells of an assembly lattice
-- order proprietary [templates](lib/Templates/) and [plotting tools](lib/PostProcessing/) in a library to be copied, updated and used in other projects
+- introduce a [plotting tool](images/) to rerpresent information on single fuel rods of an assembly lattice;
+- order proprietary [templates](lib/Templates/) and [plotting tools](lib/PostProcessing/) in a library to be copied, updated and used in other projects.
  <br></br>
 
 The model used is a standard EPR assembly infinite lattice with 20 Gd burnable absorber rods. 
