@@ -1,4 +1,4 @@
-# LATTICE PLOT TOOL
+# LATTICE PLOTTING TOOL
 
 The goals of this project are:
 - introduce a [plotting tool](images/) to rerpresent information on single fuel rods of an assembly lattice;
