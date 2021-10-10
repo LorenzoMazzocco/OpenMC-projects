@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tallies>
+  <filter id="2" type="distribcell">
+    <bins>5</bins>
+  </filter>
+  <filter id="3" type="distribcell">
+    <bins>1</bins>
+  </filter>
+  <tally id="1" name="normalization_tally">
+    <scores>fission-q-recoverable</scores>
+  </tally>
+  <tally id="2" name="fuel_power_tally">
+    <filters>2</filters>
+    <scores>fission-q-recoverable</scores>
+  </tally>
+  <tally id="3" name="BA_power_tally">
+    <filters>3</filters>
+    <scores>fission-q-recoverable</scores>
+  </tally>
+  <tally id="4" name="fuel_plutonium_tally">
+    <filters>2</filters>
+    <nuclides>U238</nuclides>
+    <scores>(n,gamma)</scores>
+  </tally>
+  <tally id="5" name="BA_plutonium_tally">
+    <filters>3</filters>
+    <nuclides>U238</nuclides>
+    <scores>(n,gamma)</scores>
+  </tally>
+</tallies>
