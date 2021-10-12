@@ -5,7 +5,7 @@ plutonium produced in a PWR pincell at low burnup. In particular we want to know
 the plutonium crosses the weapon-grade composition threshold (7% Pu-240).
 
 ## Model
-We use the previously [developed model](lib/Templates/EPR.py) for the EPR pincell with a concentration of boron in the borated water of 2000 ppm. \
+We use the previously [developed model](lib/Templates/EPR.py) for the EPR pincell with a concentration of boron in the borated water of 2000 ppm. 
 
 The depletion chained used was the [semplified LWR spectrum depletion chain](https://openmc.org/depletion-chains/) supplied by the OpenMC website. 
 
