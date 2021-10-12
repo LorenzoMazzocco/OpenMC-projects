@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material depletable="true" id="1" name="fuel_No_BA" volume="0.4961396250000001">
+    <density units="g/cc" value="10.307" />
+    <nuclide ao="0.0002714687807807027" name="U234" />
+    <nuclide ao="0.030371951807009787" name="U235" />
+    <nuclide ao="0.9692174612847976" name="U238" />
+    <nuclide ao="0.00013911812741195577" name="U236" />
+    <nuclide ao="1.999242" name="O16" />
+    <nuclide ao="0.000758" name="O17" />
+  </material>
+  <material id="2" name="M5">
+    <density units="g/cc" value="6.55" />
+    <nuclide name="Zr90" wo="0.5013567368810073" />
+    <nuclide name="Zr91" wo="0.1105510247126014" />
+    <nuclide name="Zr92" wo="0.1708372281927832" />
+    <nuclide name="Zr94" wo="0.176898294183888" />
+    <nuclide name="Zr96" wo="0.029106716029720325" />
+    <nuclide name="Nb93" wo="0.01" />
+    <nuclide name="O16" wo="0.001249496518284908" />
+    <nuclide name="O17" wo="5.034817150919744e-07" />
+  </material>
+  <material id="3" name="helium">
+    <density units="g/cc" value="0.00222185" />
+    <nuclide ao="2e-06" name="He3" />
+    <nuclide ao="0.999998" name="He4" />
+  </material>
+  <material id="4">
+    <density units="g/cc" value="0.7434869739478958" />
+    <nuclide ao="0.11080231394521382" name="H1" />
+    <nuclide ao="1.725904029676342e-05" name="H2" />
+    <nuclide ao="0.055388786183674536" name="O16" />
+    <nuclide ao="2.1000309080754255e-05" name="O17" />
+    <nuclide ao="3.666356060774541e-05" name="B10" />
+    <nuclide ao="0.00014831908625272588" name="B11" />
+    <sab name="c_H_in_H2O" />
+    <sab name="c_H_in_H2O" />
+  </material>
+</materials>
