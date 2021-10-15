@@ -88,6 +88,8 @@ MTHM = 3.14*(pincell.pin_fuel_or**2)*9.085/(1000*1000) #density of U 3%wt enr. i
 power_GW = power/1E9 #power of the pincell in MW/cm
 burnup = (_time/(60*60*24))*(power_GW)/(MTHM) #burnup series in MWd/MTHM
 
+# find burnup value for weapon grade threshold
+burnup_threshold = burnup[np.amax(np.where(Pu_grade > 0.93))]
 
 ##################################################################
 #                           PLOTTING                             #
@@ -96,25 +98,27 @@ burnup = (_time/(60*60*24))*(power_GW)/(MTHM) #burnup series in MWd/MTHM
 # PLOT PLUTONIUM GRADE
 fig = plt.figure(figsize=(8, 6))
 ax1 = fig.add_subplot(111)
-ax1.plot(burnup, Pu_grade*100, 'k')
+ax1.plot(burnup, Pu_grade*100, 'k', label='Isotopic composition')
 ax1.set_xlabel('Burnup [GWd/MTHM]', fontsize=9)
 ax1.set_ylabel('Isotopic Composition of Pu [% of Pu-239]')
 ax1.set_xlim(min(burnup),max(burnup))
 ax1.set_ylim(50,100)
 ax1.grid(True, linestyle='--', linewidth=0.5, axis='both')
-ax1.hlines(93, min(burnup), max(burnup), colors='r', linestyles='--', linewidth=0.7, label='weapon grade threshold')
+ax1.hlines(93, min(burnup), max(burnup), colors='r', linestyles='--', linewidth=0.7)
 #sec x axis
 ax2 = ax1.twiny()
 ax2.set_xlabel("Time [weeks]\n", fontsize=9)
 ax2.set_xlim(_time[0]/(60*60*24*7), _time[-1]/(60*60*24*7))
 #sec yaxis
 ax3 = ax1.twinx()
-ax3.plot(burnup, 1000*(238*Pu238+239*Pu239+240*Pu240)/(6.022E23), 'k--')
-#ax3.plot(burnup, 1000*239*Pu239/(6.022E23))
-#ax3.plot(burnup, 1000*240*Pu240/(6.022E23))
+ax3.plot(burnup, 1000*(238*Pu238+239*Pu239+240*Pu240)/(6.022E23), 'k--', label='Total mass of plutonium')
 ax3.set_ylabel("Mass of Pu [mg/cm]")
 ax3.set_ylim(0,100)
-fig.legend(['Pu grade','Weapon grade threshold', 'Total Mass of Pu'], loc='lower right', bbox_to_anchor=(0.9, 0.2))
+#final details
+ax1.axvspan(0,burnup_threshold, facecolor='red', alpha=0.2)
+ax1.text(burnup_threshold/2, 75, 'WEAPON GRADE', color='red', alpha=0.6, fontsize=18, weight='bold', rotation='vertical', ha='center', va='center')
+ax1.text(2*burnup[-1]/3, 93+2, 'Weapon grade threshold', fontsize=8, color='red', ha='center', va='top')
+fig.legend(loc='lower right', bbox_to_anchor=(0.9, 0.2))
 plt.savefig("images/plutonium_grade.png", dpi=700)
 plt.clf()
 
@@ -137,6 +141,8 @@ ax2.set_xlim(_time[0]/(60*60*24*7), _time[-1]/(60*60*24*7))
 ax1.legend(['Pu-238','Pu-239','Pu-240'], bbox_to_anchor=(0.2, 0.9))
 plt.savefig("images/isotopic_composition.png", dpi=700)
 plt.clf()
+
+
 
 
 

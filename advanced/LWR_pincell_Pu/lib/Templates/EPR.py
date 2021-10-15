@@ -18,8 +18,8 @@ class pincell():
 
     #EPR core
     linear_power = 154.9 #mean linear power for a fuel rod in W
-    active_length = 420 # active length in cm
-    power = linear_power*active_length # mean power per pincell in W
+    active_height = 420 # active length in cm
+    power = linear_power*active_height # mean power per pincell in W
 
 
     #fuel variables
@@ -190,7 +190,7 @@ class assembly():
 
     #EPR core
     power = (4.25E9)/241 # power per assembly in W
-    active_length = 420 # active length in cm
+    active_height = 420 # active length in cm
     side_dimension = 1.26*17
 
 
