@@ -79,7 +79,7 @@ Let's now compare the values for mu and delta in the thermal region:
   <img src='https://user-images.githubusercontent.com/36040421/137587622-4df7dbba-b00c-4492-8ee8-809a10f48681.png' width=300 />
 </p>
 
-Note that both the values are constant in the thermal region. The value of delta is lower than one (I'm downgrading the Pu more that I'm upgrading it) and the value of mu is greater than one (I'm destroying more Pu239 that I'm destroying Pu240). The physical meaning is the same.\
+Note that both the values are constant in the thermal region. The value of delta is lower than one (I'm downgrading the Pu more that I'm upgrading it) and the value of mu is greater than one (I'm destroying more Pu239 than I'm destroying Pu240). The physical meaning is the same.\
 Let's now focus on the fast region of the spectrum:
 
 <p align='center'>
