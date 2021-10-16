@@ -56,3 +56,7 @@ each of these plot types is replicated for every temperature available in the en
 
 
 >Note that the [mu](images/mu) and [mu_nom_den](images/mu_num_den) folders and plots are included for sake of completeness but are not relevant to the original question that we posed ourself at the beginning of this project since the delta metric is clearly superior for this purpouse.Having said that if you want to explore the mu plots keep in mind that different colors are attributed to different spectra regions in order to represent the different physical meaning that arise from the numerator and denominator's sign.
+
+<br><br/>
+
+> Milan (IT), october 2021
