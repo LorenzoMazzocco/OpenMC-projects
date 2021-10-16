@@ -10,7 +10,7 @@ The **structure** of the repository is the following:
 |[LWR pincell](./basic/LWR_pincell/)               |[EPR moderator-to-fuel ratio](./advanced/EPR_mod_fuel_ratio/)     |
 |[SFR pincell](./basic/SFR_pincell/)               |[Lattice plotting tool](./advanced/EPR_lattice_table/)            |
 |[EPR lattice](./basic/EPR_lattice/)               |[Plutonium production in LWR pincell](./advanced/LWR_pincell_Pu/) |
-|[Pu breeding metric](./basic/Pu_breeding_metric/) |                                                                  |
+|[WGP breeding metric](./basic/WGP_breeding_metric/) |                                                                  |
 
 <br></br>
 
