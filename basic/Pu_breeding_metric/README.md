@@ -29,6 +29,30 @@ ratio that we want to maximize.
 
 > Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu.
 
+The nuclides' of interest nuclear data is written following endf-6 format and can be found in the [endf](endf/) directory.
+
 <br><br/>
 
-The nuclides' of interest nuclear data is written following endf-6 format and can be found in the [endf](endf/) directory.
+## Results
+
+The results are saved in the [images](images/) folder. There are 3 main plot types produced:
+- delta as a function of E
+- mu as a function of E
+- mu numerator and denominator as a function of E
+
+each of these plot types is replicated for every temperature available in the endf datasets for the selected reaction and nuclides. The name of the files is the temperature in kelvin.
+<br><br/>
+
+### Delta metric
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137566240-41fb0002-98ba-4c97-bb2e-16e2a1c200f9.png' width=700/>
+<p/>
+<br><br/>
+ 
+### Mu metric
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137566356-580525b4-0a43-493d-a668-3296d216c72a.png' width=700/>
+<p/>
+
+
+>Note that the [mu](images/mu) and [mu_nom_den](images/mu_num_den) folders and plots are included for sake of completeness but are not relevant to the original question that we posed ourself at the beginning of this project since the delta metric is clearly superior for this purpouse.Having said that if you want to explore the mu plots keep in mind that different colors are attributed to different spectra regions in order to represent the different physical meaning that arise from the numerator and denominator's sign.
