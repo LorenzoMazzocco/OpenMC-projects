@@ -29,7 +29,7 @@ ratio that we want to maximize.
 
 > Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu.
 
-The nuclides' of interest nuclear data is written following endf-6 format and can be found in the [endf](endf/) directory.
+The nuclides' of interest nuclear data is written following endf-6 formatting and can be found in the [endf](endf/) directory.
 
 <br><br/>
 
