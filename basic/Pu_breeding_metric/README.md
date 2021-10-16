@@ -51,7 +51,7 @@ each of these plot types is replicated for every temperature available in the en
  
 ### Mu metric
 <p align='center'>
-  <img src='https://user-images.githubusercontent.com/36040421/137566356-580525b4-0a43-493d-a668-3296d216c72a.png' width=700/>
+  <img src='https://user-images.githubusercontent.com/36040421/137566670-44fafb82-9775-4184-aa74-c46fb673bc68.png' width=700/>
 <p/>
 
 
