@@ -64,11 +64,15 @@ for temperature in temperatures:
     plt.clf()
 
     #PLOT MU
-    plt.scatter(energies[c_1], mu[c_1], s=0.2, c='blue', label='create 239 / create 240')
-    plt.scatter(energies[c_2], mu[c_2], s=0.2, c='red', label='create 239 / destroy 240')
-    plt.scatter(energies[c_3], mu[c_3], s=0.2, c='green', label='destroy 239 / create 240')
-    plt.scatter(energies[c_4], mu[c_4], s=0.2, c='orange', label='destroy 239 / destroy 240 [inverse and maximize]')
-    plt.legend()
+    plt.scatter(energies[c_1], mu[c_1], s=0.2, c='blue', label='create 239 / create 240 (+/+)')
+    plt.scatter(energies[c_2], mu[c_2], s=0.2, c='red', label='create 239 / destroy 240 (+/-)')
+    plt.scatter(energies[c_3], mu[c_3], s=0.2, c='green', label='destroy 239 / create 240 (-/+)')
+    plt.scatter(energies[c_4], mu[c_4], s=0.2, c='orange', label='destroy 239 / destroy 240 (-/-)')
+    lgnd = plt.legend()
+    lgnd.legendHandles[0]._sizes = [30]
+    lgnd.legendHandles[1]._sizes = [30]
+    lgnd.legendHandles[2]._sizes = [30]
+    lgnd.legendHandles[3]._sizes = [30]
     plt.xscale('log')
     plt.yscale('symlog')
     plt.grid(b=True, which='both', linewidth=0.4, ls='--')
