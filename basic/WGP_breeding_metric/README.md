@@ -27,7 +27,8 @@ depending from the numerator and denominator's sign. Therefore the metric mu ass
 complex post-processing work to be useful for the analysis that we want to perform. Therefore the delta metric is clearly superior since it is defined as a positive
 ratio that we want to maximize.
 
-> Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu.
+> Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu. This 
+> is done at the end of this readme.
 
 The nuclides' of interest nuclear data is written following endf-6 formatting and can be found in the [endf](endf/) directory.
 
@@ -58,5 +59,42 @@ each of these plot types is replicated for every temperature available in the en
 >Note that the [mu](images/mu) and [mu_nom_den](images/mu_num_den) folders and plots are included for sake of completeness but are not relevant to the original question that we posed ourself at the beginning of this project since the delta metric is clearly superior for this purpouse.Having said that if you want to explore the mu plots keep in mind that different colors are attributed to different spectra regions in order to represent the different physical meaning that arise from the numerator and denominator's sign.
 
 <br><br/>
+<br><br/>
+<br><br/>
+
+### Two metrics, one meaning
+Despite delta and mu having a very different look they convey the same information. In this section we will demonstrate this in a brief empirical analysis of the two metrics computed at a temperature of 900K.
+
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137587203-d7769b7d-bfcb-476e-939b-410e60c59c95.png' width=400 />
+  <img src='https://user-images.githubusercontent.com/36040421/137587213-d5fc287e-cecd-4228-9d23-c01d0f05ccd2.png' width=400 />
+</p>
+
+It is clear that the mu metric presents the 'orange configuration' (numerator and denominator are both negative) for the thermal and fast region of the spectrum. 
+When both the numerator and the denominator are negative it means that we are destroying Pu239 and destroying Pu240. Therefore the reciprocal of mu (1/mu) in that region represents the ratio between the number of Pu240 isotopes destroyed per unit time over the number of Pu239 isotopes destroyed per unit time. It is clear that we want to maximize 1/mu in this region if we want to breed WGP. 
+Let's now compare the values for mu and delta in the thermal region:
+
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137587621-02d87efa-c790-48b5-897d-aeaaa78e4570.png' width=300 />
+  <img src='https://user-images.githubusercontent.com/36040421/137587622-4df7dbba-b00c-4492-8ee8-809a10f48681.png' width=300 />
+</p>
+
+Note that both the values are constant in the thermal region. The value of delta is lower than one (I'm downgrading the Pu more that I'm upgrading it) and the value of mu is greater than one (I'm destroying more Pu239 that I'm destroying Pu240). The physical meaning is the same.\
+Let's now focus on the fast region of the spectrum:
+
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137587784-146979ff-72c9-449f-b98c-4bd1def7e2db.png' width=250 />
+  <img src='https://user-images.githubusercontent.com/36040421/137587792-c0b051fb-ad30-44e5-8d3a-ef46ee55718c.png' width=250 />
+</p>
+Looking at the orange portion for mu, the values for delta and 1/mu show strong correspondence even for little variations./
+For the neutron energy of exactly 1 eV this bond between the two functions really stands out:
+
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/137588149-105ee187-e990-4c0c-a205-02b877f04008.png' width=250 />
+  <img src='https://user-images.githubusercontent.com/36040421/137588153-fbd7d8fa-8c54-4879-a2ed-7402580ff04f.png' width=250 />
+</p>
+As the value of mu approaches zero (meaning that we are not destroying Pu239 but still destroying Pu240) the value of delta spikes up to a local maximum.
+<br></br>
+<br></br>
 
 > Milan (IT), october 2021
