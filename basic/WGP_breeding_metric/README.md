@@ -28,7 +28,7 @@ complex post-processing work to be useful for the analysis that we want to perfo
 ratio that we want to maximize.
 
 > Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu. This 
-> is done at the end of this readme.
+> is done later in this readme.
 
 The nuclides' of interest nuclear data is written following endf-6 formatting and can be found in the [endf](endf/) directory.
 
@@ -59,8 +59,7 @@ each of these plot types is replicated for every temperature available in the en
 >Note that the [mu](images/mu) and [mu_nom_den](images/mu_num_den) folders and plots are included for sake of completeness but are not relevant to the original question that we posed ourself at the beginning of this project since the delta metric is clearly superior for this purpouse.Having said that if you want to explore the mu plots keep in mind that different colors are attributed to different spectra regions in order to represent the different physical meaning that arise from the numerator and denominator's sign.
 
 <br><br/>
-<br><br/>
-<br><br/>
+
 
 ### Two metrics, one meaning
 Despite delta and mu having a very different look they convey the same information. In this section we will demonstrate this in a brief empirical analysis of the two metrics computed at a temperature of 900K.
@@ -97,6 +96,30 @@ As the value of mu approaches zero (meaning that we are not destroying Pu239 but
 <br></br>
 <br></br>
 
+## Taking into account the isotopic composition 
+We identified the delta metric as the simplest and most effective but both the metrics proposed are indipendent of the isotopic composition of the material to be irradiated. This is a problem since the weights given to the different cross section are all the same (unitary) but in a realistic scenario our sample will have much more U238 than Pu239 or Pu240. To correct the formula we simply assign each cross section a coefficient equal to the atom percentage of the corrisponding isotope (for isotope i is n_i/n_tot, with n=atomic density (atoms/cm3)). There fore we obtain the following formula:
 
+
+<pre>
+&#916(E, T) = {(n<sub>238</sub>/n<sub>tot</sub>)*&#963<sub>c,238</sub> +  (n<sub>240</sub>/n<sub>tot</sub>)*(&#963<sub>f,240</sub> + &#963<sub>c,240</sub>)} / {(n<sub>239</sub>/n<sub>tot</sub>)*(&#963<sub>f,239</sub> + &#963<sub>c,239</sub>)}
+
+simplifing 1/n<sub>tot</sub> in the numerator and denominator we are left with:
+
+&#916(E, T) = {(n<sub>238</sub>)*&#963<sub>c,238</sub> +  (n<sub>240</sub>)*(&#963<sub>f,240</sub> + &#963<sub>c,240</sub>)} / {(n<sub>239</sub>)*(&#963<sub>f,239</sub> + &#963<sub>c,239</sub>)}
+
+which can be written in a compact way by using macroscopic cross sections:
+
+&#916(E, T) = [&#931<sub>c,238</sub> +  &#931<sub>f,240</sub> + &#931<sub>c,240</sub>] / [&#931<sub>f,239</sub> + &#931<sub>c,239</sub>]
+</pre>
+
+<br></br> 
+
+Now we have a metric that takes into consideration the isotopic composition but we have added 3 more degrees of freedom: n_238, n_239, n_240. This variables can be chosen arbitrarily but it is way more useful to simulate a realistic isotopic composition for the problem we are considering. In order to do that we retrieve data from the [burnup simulation of a LWR pincell project](https://github.com/LorenzoMazzocco/OpenMC-projects/tree/main/advanced/LWR_pincell_Pu) on the atom count for U238, Pu239 and Pu240. Now our metric depends only on energy E, temperature T and time t. To simplify the analysis we are goint to stick to a temperature of 600K and substitute time with burnup b in GWd/MTHM.\
+For each timestep of the burnup simulation we generate a plot of DELTA(E), we then collect all the images in a GIF animation to better understand the evolution of the metric over the spectrum as the burnup increases.
+
+
+<p align='center'>
+  <img src='movie.gif' width=550 />
+</p>
 
 > Milan (IT), october 2021
