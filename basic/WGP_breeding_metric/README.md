@@ -97,7 +97,7 @@ As the value of mu approaches zero (meaning that we are not destroying Pu239 but
 <br></br>
 
 ## Taking into account the isotopic composition 
-We identified the delta metric as the simplest and most effective but both the metrics proposed are indipendent of the isotopic composition of the material to be irradiated. This is a problem since the weights given to the different cross section are all the same (unitary) but in a realistic scenario our sample will have much more U238 than Pu239 or Pu240. To correct the formula we simply assign each cross section a coefficient equal to the atom percentage of the corrisponding isotope (for isotope i is n_i/n_tot, with n=atomic density (atoms/cm3)). There fore we obtain the following formula:
+We identified the delta metric as the simplest and most effective but both the metrics proposed are indipendent of the isotopic composition of the material to be irradiated. This is a problem since the weights given to the different cross section are all the same (unitary) but in a realistic scenario our sample will have much more U238 than Pu239 or Pu240. To correct the formula we simply assign each cross section a coefficient equal to the atom percentage of the corrisponding isotope (for isotope i is n_i/n_tot, with n=atomic density (atoms/cm3)). Therefore we obtain the following formula:
 
 
 <pre>
