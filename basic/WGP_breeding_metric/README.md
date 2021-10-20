@@ -121,7 +121,10 @@ Following is the resulting [animation](movie.gif) that can be found in tha main 
 </p>
 
 The first thing we notice is that as the burnup increases the value of the metric decreases. This is because the isotopic prevalence of Pu239 increases and that of U238 decreases.
-We also notice a clear morphologic change when the function slowly spikes at exactly 1eV for burnup a greater than 2 GWd/MTHM. The cause of the spike is that Pu240 FINIREEEE
+We also notice a clear morphologic change when the function slowly spikes at exactly 1eV for burnups greater than 2 GWd/MTHM. The cause of the spike is due to the fission and capture cross section of Pu240 and the effects begin to manifest themself when we start to create Pu240.\
+Following we can see the isotopic composition of Pu as the burnup increases and the fission cross section for Pu240:
+
+FINIREEEEE
 <br></br>
 <br></br>
 
