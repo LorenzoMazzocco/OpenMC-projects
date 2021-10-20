@@ -120,6 +120,8 @@ Following is the resulting [animation](movie.gif) that can be found in tha main 
   <img src='movie.gif' width=550 />
 </p>
 
+The first thing we notice is that as the burnup increases the value of the metric decreases. This is because the isotopic prevalence of Pu239 increases and that of U238 decreases.
+
 <br></br>
 <br></br>
 
