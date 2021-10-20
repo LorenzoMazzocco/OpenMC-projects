@@ -73,6 +73,7 @@ results = openmc.deplete.ResultsList.from_hdf5("depletion_results.h5")
 _time, Pu238 = results.get_atoms("1", "Pu238")
 _time, Pu239 = results.get_atoms("1", "Pu239")
 _time, Pu240 = results.get_atoms("1", "Pu240")
+_time, U238 = results.get_atoms("1", "U238")
 
 
 #remove first value
@@ -80,6 +81,7 @@ _time = _time[1:]
 Pu238 = Pu238[1:]
 Pu239 = Pu239[1:]
 Pu240 = Pu240[1:]
+U238 = U238[1:]
 
 Pu_grade = Pu239/(Pu238+Pu239+Pu240) #plutonium grade (ao)
 
@@ -87,6 +89,9 @@ Pu_grade = Pu239/(Pu238+Pu239+Pu240) #plutonium grade (ao)
 MTHM = 3.14*(pincell.pin_fuel_or**2)*9.085/(1000*1000) #density of U 3%wt enr. is 9.085 in MTHM/cm
 power_GW = power/1E9 #power of the pincell in MW/cm
 burnup = (_time/(60*60*24))*(power_GW)/(MTHM) #burnup series in MWd/MTHM
+
+export_a = np.asarray([burnup, Pu239, Pu240, U238])
+np.savetxt("export_data.csv", export_a, delimiter=",")
 
 # find burnup value for weapon grade threshold
 burnup_threshold = burnup[np.amax(np.where(Pu_grade > 0.93))]
