@@ -1,4 +1,4 @@
-# Plutonium breeding metric
+# WGP breeding metric
 This project is looking for an answer to the following question: what is the optimal neutron energy to breed weapon grade plutonium?
 
 
