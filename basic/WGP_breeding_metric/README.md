@@ -114,7 +114,7 @@ which can be written in a compact way by using macroscopic cross sections:
 
 Now we have a metric that takes into consideration the isotopic composition but we have added 3 more degrees of freedom: n_238, n_239, n_240. Those variables can be chosen arbitrarily but it is way more useful to simulate a realistic isotopic composition for the problem we are considering. In order to do that we retrieve data from the [burnup simulation of a LWR pincell project](https://github.com/LorenzoMazzocco/OpenMC-projects/tree/main/advanced/LWR_pincell_Pu) on the atom count for U238, Pu239 and Pu240. Now our metric depends only on energy E, temperature T and time t. To simplify the analysis we are goint to stick to a temperature of 600K and substitute time with burnup b in GWd/MTHM.\
 For each timestep of the burnup simulation we generate a plot of DELTA(E) at 600K, we then collect all the images in a GIF animation to better understand the evolution of the metric over the spectrum as the burnup increases.
-Following is the resulting animation that can be found in tha main folder at [movie.gif](movie.gif):
+Following is the resulting animation that can be found in the main folder at [movie.gif](movie.gif):
 <br><br/>
 <p align='center'>
   <img src='movie.gif' width=750 />
