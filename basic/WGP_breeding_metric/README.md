@@ -124,7 +124,10 @@ The first thing we notice is that as the burnup increases the value of the metri
 We also notice a clear morphologic change when the function slowly spikes at exactly 1eV for burnups greater than 2 GWd/MTHM. The cause of the spike is due to the fission and capture cross section of Pu240 and the effects begin to manifest themself when we start to create Pu240.\
 Following we can see the isotopic composition of Pu as the burnup increases and the fission cross section for Pu240:
 
-FINIREEEEE
+<p align='center'>
+  <img src='https://user-images.githubusercontent.com/36040421/138093658-5bb87e95-a368-4fc7-8dfa-ac656b0821bf.png' width=350 />
+  <img src='https://user-images.githubusercontent.com/36040421/138093678-86571b0e-d838-4578-bcc4-4ca03fb12b29.png' width=350 />
+</p>
 <br></br>
 <br></br>
 
