@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<geometry>
+  <cell id="1" material="2" region="1 -2" universe="1" />
+  <cell id="2" material="3" region="2 -3" universe="1" />
+  <cell id="3" material="1" region="3" universe="1" />
+  <cell id="4" material="13" region="-1" universe="1" />
+  <cell id="5" material="14" region="-1" universe="2" />
+  <cell id="6" material="1" universe="3" />
+  <cell fill="4" id="7" region="-4 5 -6 7 8 -9" universe="5" />
+  <cell id="8" material="1" region="~(-4 5 -6 7 8 -9)" universe="5" />
+  <cell fill="6" id="9" region="-10 11 -12 13 14 -15" universe="7" />
+  <cell id="10" material="1" region="~(-10 11 -12 13 14 -15)" universe="7" />
+  <cell fill="8" id="11" region="-16" universe="9" />
+  <hex_lattice id="4" n_rings="8" orientation="x">
+    <pitch>13</pitch>
+    <outer>3</outer>
+    <center>0 0</center>
+    <universes>
+       1 1 1 1 1 1 1 1
+      1 1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1
+   1 1 1 1 1 1 1 1 1 1 1 1
+  1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+  1 1 1 1 1 1 1 1 1 1 1 1 1
+   1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1 1
+      1 1 1 1 1 1 1 1 1
+       1 1 1 1 1 1 1 1</universes>
+  </hex_lattice>
+  <hex_lattice id="6" n_rings="8" orientation="x">
+    <pitch>13</pitch>
+    <outer>3</outer>
+    <center>0 0</center>
+    <universes>
+       2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2
+   2 2 2 2 2 2 2 2 2 2 2 2
+  2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+  2 2 2 2 2 2 2 2 2 2 2 2 2
+   2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2
+       2 2 2 2 2 2 2 2</universes>
+  </hex_lattice>
+  <hex_lattice id="8" n_rings="7">
+    <pitch>182</pitch>
+    <outer>3</outer>
+    <center>0 0</center>
+    <universes>
+      7
+     7 7
+    7 7 7
+   7 7 7 7
+  7 7 5 7 7
+ 7 7 5 5 7 7
+7 7 5 5 5 7 7
+ 7 5 5 5 5 7
+7 5 5 5 5 5 7
+ 7 5 5 5 5 7
+7 5 5 5 5 5 7
+ 7 5 5 5 5 7
+7 5 5 5 5 5 7
+ 7 5 5 5 5 7
+7 5 5 5 5 5 7
+ 7 5 5 5 5 7
+7 5 5 5 5 5 7
+ 7 5 5 5 5 7
+7 7 5 5 5 7 7
+ 7 7 5 5 7 7
+  7 7 5 7 7
+   7 7 7 7
+    7 7 7
+     7 7
+      7</universes>
+  </hex_lattice>
+  <surface coeffs="0.0 0.0 4.1" id="1" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 4.35" id="2" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 4.85" id="3" type="z-cylinder" />
+  <surface coeffs="84.37685509071785" id="4" type="y-plane" />
+  <surface coeffs="-84.37685509071785" id="5" type="y-plane" />
+  <surface coeffs="1.7320508075688772 1.0 0.0 168.7537101814357" id="6" type="plane" />
+  <surface coeffs="-1.7320508075688772 1.0 0.0 -168.7537101814357" id="7" type="plane" />
+  <surface coeffs="1.7320508075688772 1.0 0.0 -168.7537101814357" id="8" type="plane" />
+  <surface coeffs="-1.7320508075688772 1.0 0.0 168.7537101814357" id="9" type="plane" />
+  <surface coeffs="84.37685509071785" id="10" type="y-plane" />
+  <surface coeffs="-84.37685509071785" id="11" type="y-plane" />
+  <surface coeffs="1.7320508075688772 1.0 0.0 168.7537101814357" id="12" type="plane" />
+  <surface coeffs="-1.7320508075688772 1.0 0.0 -168.7537101814357" id="13" type="plane" />
+  <surface coeffs="1.7320508075688772 1.0 0.0 -168.7537101814357" id="14" type="plane" />
+  <surface coeffs="-1.7320508075688772 1.0 0.0 168.7537101814357" id="15" type="plane" />
+  <surface coeffs="0.0 0.0 1200" id="16" type="z-cylinder" />
+</geometry>
