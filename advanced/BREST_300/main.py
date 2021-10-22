@@ -1,7 +1,7 @@
 import openmc
 
 import numpy as np
-
+import shutil
 
 ####################################################################################
 #                                     MAIN VARIABLES                               #
@@ -11,7 +11,6 @@ fuel_or = 4.1
 clad_ir = fuel_or + 0.25
 clad_or = clad_ir + 0.5
 pitch = 13
-
 
 
 
@@ -25,7 +24,7 @@ Pb = openmc.Material(name='Lead')
 Pb.add_element('Pb', 1)
 
 #Lead gap
-Pb_gap = openmc.Material(name='Lead gap')
+Pb_gap = openmc.Material(name='Lead_gap')
 Pb_gap.add_element('Pb', 1)
 
 ############################################################ Cladding
@@ -48,7 +47,7 @@ N = openmc.Material(name='Nitrogen')
 N.add_element('N', 1.0)
 
 # Natural Uranium
-U = openmc.Material(name='Natural Uranium')
+U = openmc.Material(name='Natural_Uranium')
 U.add_element('U', 1.0)
 
 # Plutonium 239
@@ -112,6 +111,10 @@ fuel_out_universe = openmc.Universe(cells=[fuel_out_cell, gap_cell, clad_cell, c
 outer_lead = openmc.Cell(fill=Pb)
 outer_universe = openmc.Universe(cells=[outer_lead])
 
+## DEBUG
+clad_inf_cell = openmc.Cell(fill=clad)
+clad_universe = openmc.Universe(cells=[clad_inf_cell])
+
 
 ############################################################## ASSEMBLY IN
 assembly_in_lattice = openmc.HexLattice()
@@ -131,10 +134,11 @@ in_8 = [fuel_in_universe]*1
 assembly_in_lattice.universes = [in_1, in_2, in_3, in_4, in_5, in_6, in_7, in_8]
 
 assembly_in_container_prism = openmc.model.hexagonal_prism(edge_length=97.43, orientation='x', origin=(0,0))
-assembly_in_container = openmc.Cell(fill=assembly_in_lattice, region=assembly_in_container_prism)
-assembly_outer = openmc.Cell(fill=Pb, region=~assembly_in_container_prism)
+assembly_in_container = openmc.Cell(fill=assembly_in_lattice, region=assembly_in_container_prism, name='assembly_in_container')
+assembly_in_outer = openmc.Cell(fill=Pb, region=~assembly_in_container_prism, name='assembly_in_outer')
 
-assembly_in_universe = openmc.Universe(cells=[assembly_in_container, assembly_outer])
+assembly_in_universe = openmc.Universe(cells=[assembly_in_container, assembly_in_outer])
+
 
 ############################################################## ASSEMBLY OUT
 assembly_out_lattice = openmc.HexLattice()
@@ -154,10 +158,11 @@ out_8 = [fuel_out_universe]*1
 assembly_out_lattice.universes = [out_1, out_2, out_3, out_4, out_5, out_6, out_7, out_8]
 
 assembly_out_container_prism = openmc.model.hexagonal_prism(edge_length=97.43, orientation='x', origin=(0,0))
-assembly_out_container = openmc.Cell(fill=assembly_out_lattice, region=assembly_out_container_prism)
-assembly_outer = openmc.Cell(fill=Pb, region=~assembly_out_container_prism)
+assembly_out_container = openmc.Cell(fill=assembly_out_lattice, region=assembly_out_container_prism, name='assebly_out_container')
+assembly_out_outer = openmc.Cell(fill=Pb, region=~assembly_out_container_prism, name='assebly_out_outer')
 
-assembly_out_universe = openmc.Universe(cells=[assembly_out_container, assembly_outer])
+assembly_out_universe = openmc.Universe(cells=[assembly_out_container, assembly_out_outer])
+
 
 ########################################################################## CORE
 core_lattice = openmc.HexLattice()
@@ -175,32 +180,72 @@ core_6 = [assembly_in_universe]*6
 core_7 = [assembly_in_universe]*1
 core_lattice.universes = [core_1, core_2, core_3, core_4, core_5, core_6, core_7]
 
-circle = openmc.ZCylinder(r=1200)
-main_cell = openmc.Cell(fill=core_lattice, region = -circle)
+circle_core = openmc.ZCylinder(r=1200)
+main_cell = openmc.Cell(fill=core_lattice, region = -circle_core)
 main_universe = openmc.Universe(cells=[main_cell])
 
-geometry = openmc.Geometry(main_universe)
-geometry.export_to_xml()
-
-print(geometry.get_all_materials())
+core_geometry = openmc.Geometry(main_universe)
+core_geometry.export_to_xml()
 
 
 
+####################################################################################
+#                                 GEOMETRY PLOTS                                   #
+####################################################################################
 
-# FAST PLOT for debugging
-plot = openmc.Plot.from_geometry(geometry)
-plot.basis = 'xy'
-plot.pixels = (1500, 1500)
-plot.color_by = 'material'
-plot.colors = colors = {
+# TOP VIEW
+top_view = openmc.Plot.from_geometry(core_geometry)
+top_view.basis = 'xy'
+top_view.pixels = (2000, 2000)
+top_view.color_by = 'material'
+top_view.colors = {
     fuel_inner: 'yellow',
     fuel_outer: 'orange',
     Pb: 'grey',
     Pb_gap: 'grey',
     clad: 'black'
 }
-plot.filename = 'top_view'
+top_view.filename = 'images/geometry/core_top_view'
 
-plots = openmc.Plots([plot])
+# SIDE VIEW LONG
+side_view_long = openmc.Plot.from_geometry(core_geometry)
+side_view_long.basis = 'yz'
+side_view_long.pixels = (2000, 2000)
+side_view_long.color_by = 'material'
+side_view_long.colors = {
+    fuel_inner: 'yellow',
+    fuel_outer: 'orange',
+    Pb: 'grey',
+    Pb_gap: 'grey',
+    clad: 'black'
+}
+side_view_long.filename = 'images/geometry/core_side_view_long'
+
+# SIDE VIEW SHORT
+side_view_short = openmc.Plot.from_geometry(core_geometry)
+side_view_short.basis = 'xz'
+side_view_short.pixels = (2000, 2000)
+side_view_short.color_by = 'material'
+side_view_short.colors = {
+    fuel_inner: 'yellow',
+    fuel_outer: 'orange',
+    Pb: 'grey',
+    Pb_gap: 'grey',
+    clad: 'black'
+}
+side_view_short.filename = 'images/geometry/core_side_view_short'
+
+
+plots = openmc.Plots([top_view, side_view_long, side_view_short])
 plots.export_to_xml()
 openmc.plot_geometry()
+
+
+
+####################################################################################
+#                                 ORDER FOLDER                                     #
+####################################################################################
+
+shutil.move("materials.xml", "model_xml/materials.xml")
+shutil.move("geometry.xml", "model_xml/geometry.xml")
+shutil.move("plots.xml", "model_xml/plots.xml")
