@@ -187,7 +187,7 @@ print(geometry.get_all_materials())
 
 
 
-#PLOTTA TUTTO DIO CANEEE
+# FAST PLOT for debugging
 plot = openmc.Plot.from_geometry(geometry)
 plot.basis = 'xy'
 plot.pixels = (1500, 1500)
