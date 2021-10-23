@@ -3,7 +3,7 @@
   <plot basis="xy" color_by="material" filename="images/geometry/core_top_view" id="1" type="slice">
     <origin>0.0 0.0 0.0</origin>
     <width>2400.0 2400.0</width>
-    <pixels>2000 2000</pixels>
+    <pixels>5000 5000</pixels>
     <color id="1" rgb="128 128 128" />
     <color id="2" rgb="128 128 128" />
     <color id="3" rgb="0 0 0" />

@@ -54,7 +54,7 @@
        2 2 2 2 2 2 2 2</universes>
   </hex_lattice>
   <hex_lattice id="9" n_rings="7">
-    <pitch>182</pitch>
+    <pitch>169</pitch>
     <outer>3</outer>
     <center>0 0</center>
     <universes>

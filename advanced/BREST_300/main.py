@@ -10,7 +10,8 @@ import shutil
 fuel_or = 4.1
 clad_ir = fuel_or + 0.25
 clad_or = clad_ir + 0.5
-pitch = 13
+assembly_pitch = 13
+core_pitch = assembly_pitch*13
 
 
 
@@ -22,10 +23,14 @@ pitch = 13
 #Lead
 Pb = openmc.Material(name='Lead')
 Pb.add_element('Pb', 1)
+#Pb.set_density('g/cc', )
+#Pb.temperature =
 
 #Lead gap
 Pb_gap = openmc.Material(name='Lead_gap')
 Pb_gap.add_element('Pb', 1)
+#Pb_gap.set_density('g/cc', )
+#Pb_gap.temperature =
 
 ############################################################ Cladding
 # Cladding
@@ -40,6 +45,8 @@ clad.add_element('Mn', percent=0.0062, percent_type='wo')
 clad.add_element('V',  percent=0.0032, percent_type='wo')
 clad.add_element('Nb', percent=0.0026, percent_type='wo')
 clad.add_element('C',  percent=0.0015, percent_type='wo')
+#clad.set_density('g/cc', )
+#clad.temperature =
 
 ############################################################ Fuel
 # Nitrogen
@@ -78,10 +85,13 @@ fissionable_outer = openmc.Material.mix_materials([U, Pu], [0.8554, 0.1446], 'wo
 
 # Fuel for inner core
 fuel_inner = openmc.Material.mix_materials([fissionable_inner, N], [0.5,0.5], 'ao', name='fuel_inner')
+#fuel_inner.set_density('g/cc', )
+#fuel_inner.temperature =
 
 # Fuel for outer core
 fuel_outer = openmc.Material.mix_materials([fissionable_outer, N], [0.5,0.5], 'ao', name='fuel_outer')
-
+#fuel_outer.set_density('g/cc', )
+#fuel_outer.temperature =
 
 materials = openmc.Materials([Pb, Pb_gap, clad, N, U, Pu, fuel_inner, fuel_outer])
 materials.export_to_xml()
@@ -119,7 +129,7 @@ clad_universe = openmc.Universe(cells=[clad_inf_cell])
 ############################################################## ASSEMBLY IN
 assembly_in_lattice = openmc.HexLattice()
 assembly_in_lattice.center = (0,0)
-assembly_in_lattice.pitch = (pitch,)
+assembly_in_lattice.pitch = (assembly_pitch,)
 assembly_in_lattice.orientation = 'x'
 assembly_in_lattice.outer = outer_universe
 
@@ -143,7 +153,7 @@ assembly_in_universe = openmc.Universe(cells=[assembly_in_container, assembly_in
 ############################################################## ASSEMBLY OUT
 assembly_out_lattice = openmc.HexLattice()
 assembly_out_lattice.center = (0,0)
-assembly_out_lattice.pitch = (pitch,)
+assembly_out_lattice.pitch = (assembly_pitch,)
 assembly_out_lattice.orientation = 'x'
 assembly_out_lattice.outer = outer_universe
 
@@ -167,7 +177,7 @@ assembly_out_universe = openmc.Universe(cells=[assembly_out_container, assembly_
 ########################################################################## CORE
 core_lattice = openmc.HexLattice()
 core_lattice.center = (0,0)
-core_lattice.pitch = (pitch*14,)
+core_lattice.pitch = (core_pitch,)
 core_lattice.orientation = 'y'
 core_lattice.outer = outer_universe
 
@@ -196,7 +206,7 @@ core_geometry.export_to_xml()
 # TOP VIEW
 top_view = openmc.Plot.from_geometry(core_geometry)
 top_view.basis = 'xy'
-top_view.pixels = (2000, 2000)
+top_view.pixels = (5000, 5000)
 top_view.color_by = 'material'
 top_view.colors = {
     fuel_inner: 'yellow',

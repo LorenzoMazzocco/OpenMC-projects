@@ -265,7 +265,7 @@ config_8 = {'lattice':
             [f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f]],
             'name': 'config_8_BA'}
 
-configuration = config_20
+configuration = config_12
 
 #CREATE THE LATTICE
 
@@ -445,7 +445,7 @@ tallies.export_to_xml()
 #                           RUN OPENMC                            #
 ##################################################################
 
-#openmc.run()
+openmc.run()
 
 
 
