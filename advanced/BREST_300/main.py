@@ -23,14 +23,14 @@ core_pitch = assembly_pitch*13
 #Lead
 Pb = openmc.Material(name='Lead')
 Pb.add_element('Pb', 1)
-#Pb.set_density('g/cc', )
-#Pb.temperature =
+Pb.set_density('g/cc', 10.48)
+Pb.temperature = 480 + 273.15
 
 #Lead gap
 Pb_gap = openmc.Material(name='Lead_gap')
 Pb_gap.add_element('Pb', 1)
-#Pb_gap.set_density('g/cc', )
-#Pb_gap.temperature =
+Pb_gap.set_density('g/cc', 10.48)
+Pb_gap.temperature = + 273.15
 
 ############################################################ Cladding
 # Cladding
@@ -45,8 +45,8 @@ clad.add_element('Mn', percent=0.0062, percent_type='wo')
 clad.add_element('V',  percent=0.0032, percent_type='wo')
 clad.add_element('Nb', percent=0.0026, percent_type='wo')
 clad.add_element('C',  percent=0.0015, percent_type='wo')
-#clad.set_density('g/cc', )
-#clad.temperature =
+clad.set_density('g/cc', 7.64)
+clad.temperature = 600 + 273.15
 
 ############################################################ Fuel
 # Nitrogen
@@ -85,13 +85,13 @@ fissionable_outer = openmc.Material.mix_materials([U, Pu], [0.8554, 0.1446], 'wo
 
 # Fuel for inner core
 fuel_inner = openmc.Material.mix_materials([fissionable_inner, N], [0.5,0.5], 'ao', name='fuel_inner')
-#fuel_inner.set_density('g/cc', )
-#fuel_inner.temperature =
+fuel_inner.set_density('g/cc', )
+fuel_inner.temperature =
 
 # Fuel for outer core
 fuel_outer = openmc.Material.mix_materials([fissionable_outer, N], [0.5,0.5], 'ao', name='fuel_outer')
-#fuel_outer.set_density('g/cc', )
-#fuel_outer.temperature =
+fuel_outer.set_density('g/cc', )
+fuel_outer.temperature =
 
 materials = openmc.Materials([Pb, Pb_gap, clad, N, U, Pu, fuel_inner, fuel_outer])
 materials.export_to_xml()
