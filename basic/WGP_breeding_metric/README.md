@@ -39,7 +39,7 @@ The nuclides' of interest nuclear data is written following endf-6 formatting an
 
 ## Results
 
-The results are saved in the [images](images/) folder. There are 3 main plot types produced:
+The results are stored in the [images](images/) folder. There are 3 main plot types produced:
 - delta as a function of E
 - mu as a function of E
 - mu numerator and denominator as a function of E
