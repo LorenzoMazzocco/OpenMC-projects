@@ -3,7 +3,7 @@ For the successful deployment of advanced nuclear reactors it is crucial to tack
 This project is looking for an answer to the following question: what is the optimal neutron energy to breed weapon grade plutonium?
 Answering this question will give us some insights on how we can engineer more proliferation-resistant reactor cores.
 
-We proceed by creating a metric that tells us the ability of a system to breed WGP and analyze to what extent it is minimizable.
+We proceed by creating a metric that tells us the ability of a system to breed WGP and then we analyze to what extent it is minimizable.
 
 We know that WGP is defined by having an isotopic composition consisting of a maximum of 7%ao of Pu240. So ideally we want to increase the amount of Pu239 and reduce as
 much as possible the amount of Pu240. Following this logic we construct two metrics (mu and delta) using microscopic cross section for the following reactions:
