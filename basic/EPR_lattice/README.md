@@ -80,7 +80,7 @@ All of the plots can be found in the images folder for each configuration ([8 BA
 
 
 ### Influence of BA on neutron flux
-It is evident that the gadolinium burnable absorbers have a strong influence on the value of the neutron flux throughout the geometry. In particular around a BA rod the flux significantly reduces (this is because of the absence of fission events and the subsequent release of prompt neutrons). The following plots are revealing:
+It is evident that the gadolinium burnable absorbers have a strong influence on the value of the neutron flux throughout the geometry. In particular around a BA rod the flux significantly reduces (this is due to the absence of fission events and the subsequent release of prompt and delayed neutrons). The following plots are revealing:
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/36040421/135936161-452dd61d-4a19-4fb8-8f3f-091eca29368c.png" width="550" />
