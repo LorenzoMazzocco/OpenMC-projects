@@ -69,7 +69,7 @@ In particular we can see that it increases proportionally to radial distance fro
 <p/>
 <br></br>
 
-The cause of this phenomena finds his roots in the elastic scattering reaction rates. In fact we can see that inside the fuel pellet the scattering reaction rates are quite high and not negligible:
+The cause of this phenomena finds his roots in the scattering phenomena affecting neutrons. In fact fast neutrons are generated in the fuel pellet following fission events, they are then slowed down by moderating materials (in the case of a LWR almost only by water). 
 
 <p align='center'>
 <img src="https://user-images.githubusercontent.com/36040421/136120495-c97a3085-fc9f-46d4-9682-9af2c65a1136.png" width="600" /> 
