@@ -30,7 +30,7 @@ depending from the numerator and denominator's sign. Therefore the metric mu ass
 complex post-processing work to be useful for the analysis that we want to perform. The delta metric is clearly superior since it is defined as a positive
 ratio that we want to minimize.
 
-> Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu. This 
+> Note that it can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu. This 
 > is done later in this readme.
 
 The nuclides' of interest nuclear data is written following endf-6 formatting and can be found in the [endf](endf/) directory.
