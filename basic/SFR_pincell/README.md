@@ -6,7 +6,7 @@ This simulation is performed on a sodium fast reactor (SFR) fuel pincell with ox
 ## Geometry and Materials
 
 >**FUNDAMENTAL GEOMETRY PARAMETERS**
->- Fuel pellet outer radius: 0.0.4715 cm
+>- Fuel pellet outer radius: 0.4715 cm
 >- Cladding inner radius: 0.4865 cm
 >- Cladding outer radius: 0.5365 cm
 >- Lattice pitch: 1.073 cm
