@@ -36,7 +36,7 @@ The used mesh is a rectangular regular 300x300 mesh.
 >- neutron mean energy (mesh)
 >- recoverable energy from fission (mesh)
 
-(Please note that all this quantities are not normalized and therefore the unit of measure depends on the number of neutron sources for the eigenvalue simulation, which are not quantified. The results should be read as relative changes throughout the geometry)
+(Please note that all this quantities are not normalized and therefore the unit of measure depends on the number of neutron sources for the eigenvalue simulation, which is not computed. The results should be read as relative changes throughout the geometry)
 
 The results are represented in 2 different ways:
 - mesh plot (top view)
