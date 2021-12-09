@@ -141,5 +141,7 @@ Following we can see the isotopic composition of Pu as the burnup increases and 
 ## Mimizing the breeding capability
 From the GIF animation produced we verify that the thermal spectrum is overall safer, from a proliferation point of view, than the fast spectrum. 
 We also notice that, sticking to the thermal spectrum, the metric is minimizable in the range between 0.1 and 0.7 eV.
+<br></br>
+<br></br>
 
 > Milan (IT), october 2021
