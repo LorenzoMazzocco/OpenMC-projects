@@ -24,7 +24,7 @@ The model presents 3 different types of pins:
 >- Cladding: M5 alloy (Zr 98.875 %wt - Nb 1 %wt - O 0.125 %wt) (grey)
 
 <br></br>
-The BA (Burnable Absorber) rods can change in number. We can have 4 different configurations, in order 8 BA, 12 BA, 16 BA, 20 BA
+The BA (Burnable Absorber) rods can change in number. Four different configurations can be obtained: from the left, 8 BA, 12 BA, 16 BA, 20 BA.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/36040421/135927626-10d8c1d2-753a-4305-90b6-be0676913de1.png" width="220" />
