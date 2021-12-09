@@ -27,8 +27,8 @@ We want a metric that is non dimensional and indipendent from the neutron flux. 
 
 Both the metrics have a physical meaning but it is clear from a brief analysis that the metric mu has the problem of
 depending from the numerator and denominator's sign. Therefore the metric mu assumes different meanings in different regions of the energy spectrum and has to undergo
-complex post-processing work to be useful for the analysis that we want to perform. Therefore the delta metric is clearly superior since it is defined as a positive
-ratio that we want to maximize.
+complex post-processing work to be useful for the analysis that we want to perform. The delta metric is clearly superior since it is defined as a positive
+ratio that we want to minimize.
 
 > Note that can be proven that the two metrics convey the exact same information and therefore there is no downside to using delta instead of mu. This 
 > is done later in this readme.
