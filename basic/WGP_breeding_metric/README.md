@@ -72,7 +72,7 @@ Despite delta and mu having a very different look they convey the same informati
   <img src='https://user-images.githubusercontent.com/36040421/137587213-d5fc287e-cecd-4228-9d23-c01d0f05ccd2.png' width=400 />
 </p>
 
-It is clear that the mu metric presents the 'orange configuration' (numerator and denominator are both negative) for the thermal and fast region of the spectrum. 
+The mu metric presents the 'orange configuration' (numerator and denominator are both negative) for the thermal and fast region of the spectrum. 
 When both the numerator and the denominator are negative it means that we are destroying Pu239 and destroying Pu240. Therefore the reciprocal of mu (1/mu) in that region represents the ratio between the number of Pu240 isotopes destroyed per unit time over the number of Pu239 isotopes destroyed per unit time. It is clear that we want to maximize 1/mu in this region if we want to breed WGP. 
 Let's now compare the values for mu and delta in the thermal region:
 
@@ -89,7 +89,7 @@ Let's now focus on the fast region of the spectrum:
   <img src='https://user-images.githubusercontent.com/36040421/137587792-c0b051fb-ad30-44e5-8d3a-ef46ee55718c.png' width=250 />
 </p>
 Looking at the orange portion for mu, the values for delta and 1/mu show strong correspondence even for little variations./
-For the neutron energy of exactly 1 eV this bond between the two functions really stands out:
+For the neutron energy of exactly 1 eV this correlation between the two functions really stands out:
 
 <p align='center'>
   <img src='https://user-images.githubusercontent.com/36040421/137588149-105ee187-e990-4c0c-a205-02b877f04008.png' width=250 />
