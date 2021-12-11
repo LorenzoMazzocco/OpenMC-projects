@@ -135,6 +135,7 @@ Following we can see the isotopic composition of Pu as the burnup increases and 
 <p align='center'>
   <img src='https://user-images.githubusercontent.com/36040421/138093678-86571b0e-d838-4578-bcc4-4ca03fb12b29.png' width=750 />
 </p>
+<br><br/>
 
 ## Mimizing the breeding capability
 From the GIF animation produced we verify that the thermal spectrum is overall safer, from a proliferation point of view, than the fast spectrum. 
