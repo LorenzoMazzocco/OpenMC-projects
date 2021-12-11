@@ -1,6 +1,8 @@
 import openmc
 import shutil
 
+import matplotlib.pyplot as plt
+
 
 class EPR_assembly():
 
@@ -15,7 +17,7 @@ class EPR_assembly():
 
     #geometric variables
     pin_fuel_or = 0.3975
-    channel_clad_ir = 0.5725
+    channel_clad_ir = 0.3975
     pitch = 1.26
 
 
@@ -23,7 +25,7 @@ class EPR_assembly():
     #                                                                CLASS METHODS
     ####################################################################################################################################################
 
-    def __init__(self, config=20, complete=False):
+    def __init__(self, config=20, complete=True):
 
         self.create_materials()
         self.create_geometry(config)
@@ -247,19 +249,21 @@ class EPR_assembly():
         top = openmc.YPlane(y0=17*self.pitch/2, boundary_type='reflective')
 
         main_cell = openmc.Cell(fill=lattice, region=+left & -right & +bottom & -top)
-        self.complete_geometry = openmc.Geometry([main_cell])
+        complete_universe = openmc.Universe(cells=[main_cell])
+        self.complete_geometry = openmc.Geometry(complete_universe)
 
 
         #===================================PARTIAL GEOMETRY
 
         #boundaries
-        left = openmc.XPlane(x0=0, boundary_type='reflective')
-        right = openmc.XPlane(x0=17*self.pitch/2, boundary_type='reflective')
-        bottom = openmc.YPlane(y0=0, boundary_type='reflective')
-        top = openmc.YPlane(y0=17*self.pitch/2, boundary_type='reflective')
+        left_partial = openmc.XPlane(x0=0, boundary_type='reflective')
+        right_partial = openmc.XPlane(x0=17*self.pitch/2, boundary_type='reflective')
+        bottom_partial = openmc.YPlane(y0=0, boundary_type='reflective')
+        top_partial = openmc.YPlane(y0=17*self.pitch/2, boundary_type='reflective')
 
-        main_cell = openmc.Cell(fill=lattice, region=+left & -right & +bottom & -top)
-        self.partial_geometry = openmc.Geometry([main_cell])
+        main_cell_partial = openmc.Cell(fill=lattice, region=+left_partial & -right_partial & +bottom_partial & -top_partial)
+        partial_universe = openmc.Universe(cells=[main_cell_partial])
+        self.partial_geometry = openmc.Geometry(partial_universe)
 
 
 
@@ -268,29 +272,20 @@ class EPR_assembly():
     #############################################################################################
 
 
-    def plot_geometry(self, complete=False):
+    def plot_geometry(self, complete=True):
 
         #top view
-        geom_plot_top = openmc.Plot().from_geometry(self.geometry)
+        geom_plot_top = openmc.Plot().from_geometry(self.complete_geometry)
         geom_plot_top.basis = 'xy'
         geom_plot_top.origin = (0., 0., 0.)
         geom_plot_top.width = (17*self.pitch, 17*self.pitch)
         geom_plot_top.pixels = (1500, 1500)
         geom_plot_top.color_by = 'material'
         geom_plot_top.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.M5:'grey', self.H2O:(102,178,255)}
-        geom_plot_top.filename = 'model_plots/top_view'
+        geom_plot_top.filename = 'model_plots/method_{}'.format(self.pitch)
 
-        #side view
-        geom_plot_side = openmc.Plot().from_geometry(self.geometry)
-        geom_plot_side.basis = 'xz'
-        geom_plot_side.origin = (0., 0., 0.)
-        geom_plot_side.width = (17*self.pitch, 17*self.pitch)
-        geom_plot_side.pixels = (1500, 1500)
-        geom_plot_side.color_by = 'material'
-        geom_plot_side.colors = {self.fuel_No_BA: (255,255,153), self.fuel_BA:(255,153,255), self.He:'green', self.M5:'grey', self.H2O:(102,178,255)}
-        geom_plot_side.filename = 'model_plots/side_view'
 
-        plots = openmc.Plots([geom_plot_top, geom_plot_side])
+        plots = openmc.Plots([geom_plot_top])
         plots.export_to_xml(path='plots.xml')
         openmc.plot_geometry()
 

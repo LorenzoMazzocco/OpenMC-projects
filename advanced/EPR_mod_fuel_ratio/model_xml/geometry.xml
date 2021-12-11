@@ -1,49 +1,49 @@
 <?xml version='1.0' encoding='utf-8'?>
 <geometry>
-  <cell id="827" material="420" region="-768" universe="414" />
-  <cell id="828" material="418" region="768 -769" universe="414" />
-  <cell id="829" material="417" region="769 -770" universe="414" />
-  <cell id="830" material="419" region="770" universe="414" />
-  <cell id="831" material="415" region="-768" universe="415" />
-  <cell id="832" material="418" region="768 -769" universe="415" />
-  <cell id="833" material="417" region="769 -770" universe="415" />
-  <cell id="834" material="419" region="770" universe="415" />
-  <cell id="835" material="419" region="-772" universe="416" />
-  <cell id="836" material="417" region="772 -771" universe="416" />
-  <cell id="837" material="419" region="771" universe="416" />
-  <cell id="838" material="419" universe="417" />
-  <cell fill="418" id="840" region="777 -778 779 -780" universe="420" />
-  <lattice id="418">
-    <pitch>1.26 1.26</pitch>
-    <outer>417</outer>
+  <cell id="183" material="98" region="-170" universe="92" />
+  <cell id="184" material="96" region="170 -171" universe="92" />
+  <cell id="185" material="95" region="171 -172" universe="92" />
+  <cell id="186" material="97" region="172" universe="92" />
+  <cell id="187" material="93" region="-170" universe="93" />
+  <cell id="188" material="96" region="170 -171" universe="93" />
+  <cell id="189" material="95" region="171 -172" universe="93" />
+  <cell id="190" material="97" region="172" universe="93" />
+  <cell id="191" material="97" region="-174" universe="94" />
+  <cell id="192" material="95" region="174 -173" universe="94" />
+  <cell id="193" material="97" region="173" universe="94" />
+  <cell id="194" material="97" universe="95" />
+  <cell fill="96" id="195" region="175 -176 177 -178" universe="97" />
+  <lattice id="96">
+    <pitch>4.0 4.0</pitch>
+    <outer>95</outer>
     <dimension>17 17</dimension>
-    <lower_left>-10.71 -10.71</lower_left>
+    <lower_left>-34.0 -34.0</lower_left>
     <universes>
-415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 
-415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 
-415 415 414 415 415 416 415 415 416 415 415 416 415 415 414 415 415 
-415 415 415 416 415 415 415 414 415 414 415 415 415 416 415 415 415 
-415 415 415 415 414 415 415 415 415 415 415 415 414 415 415 415 415 
-415 415 416 415 415 416 415 415 416 415 415 416 415 415 416 415 415 
-415 415 415 415 415 415 414 415 415 415 414 415 415 415 415 415 415 
-415 415 415 414 415 415 415 415 415 415 415 415 415 414 415 415 415 
-415 415 416 415 415 416 415 415 416 415 415 416 415 415 416 415 415 
-415 415 415 414 415 415 415 415 415 415 415 415 415 414 415 415 415 
-415 415 415 415 415 415 414 415 415 415 414 415 415 415 415 415 415 
-415 415 416 415 415 416 415 415 416 415 415 416 415 415 416 415 415 
-415 415 415 415 414 415 415 415 415 415 415 415 414 415 415 415 415 
-415 415 415 416 415 415 415 414 415 414 415 415 415 416 415 415 415 
-415 415 414 415 415 416 415 415 416 415 415 416 415 415 414 415 415 
-415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 
-415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 415 </universes>
+93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 
+93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 
+93 93 92 93 93 94 93 93 94 93 93 94 93 93 92 93 93 
+93 93 93 94 93 93 93 92 93 92 93 93 93 94 93 93 93 
+93 93 93 93 92 93 93 93 93 93 93 93 92 93 93 93 93 
+93 93 94 93 93 94 93 93 94 93 93 94 93 93 94 93 93 
+93 93 93 93 93 93 92 93 93 93 92 93 93 93 93 93 93 
+93 93 93 92 93 93 93 93 93 93 93 93 93 92 93 93 93 
+93 93 94 93 93 94 93 93 94 93 93 94 93 93 94 93 93 
+93 93 93 92 93 93 93 93 93 93 93 93 93 92 93 93 93 
+93 93 93 93 93 93 92 93 93 93 92 93 93 93 93 93 93 
+93 93 94 93 93 94 93 93 94 93 93 94 93 93 94 93 93 
+93 93 93 93 92 93 93 93 93 93 93 93 92 93 93 93 93 
+93 93 93 94 93 93 93 92 93 92 93 93 93 94 93 93 93 
+93 93 92 93 93 94 93 93 94 93 93 94 93 93 92 93 93 
+93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 
+93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 93 </universes>
   </lattice>
-  <surface coeffs="0.0 0.0 0.63" id="768" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 0.645" id="769" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 0.7075" id="770" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 0.6125" id="771" type="z-cylinder" />
-  <surface coeffs="0.0 0.0 0.5725" id="772" type="z-cylinder" />
-  <surface boundary="reflective" coeffs="0" id="777" type="x-plane" />
-  <surface boundary="reflective" coeffs="10.71" id="778" type="x-plane" />
-  <surface boundary="reflective" coeffs="0" id="779" type="y-plane" />
-  <surface boundary="reflective" coeffs="10.71" id="780" type="y-plane" />
+  <surface coeffs="0.0 0.0 0.3975" id="170" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.41250000000000003" id="171" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.47500000000000003" id="172" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.4375" id="173" type="z-cylinder" />
+  <surface coeffs="0.0 0.0 0.3975" id="174" type="z-cylinder" />
+  <surface boundary="reflective" coeffs="-34.0" id="175" type="x-plane" />
+  <surface boundary="reflective" coeffs="34.0" id="176" type="x-plane" />
+  <surface boundary="reflective" coeffs="-34.0" id="177" type="y-plane" />
+  <surface boundary="reflective" coeffs="34.0" id="178" type="y-plane" />
 </geometry>

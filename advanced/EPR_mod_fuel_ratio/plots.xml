@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plots>
+  <plot basis="xy" color_by="material" filename="model_plots/method_4.0" id="14" type="slice">
+    <origin>0.0 0.0 0.0</origin>
+    <width>68.0 68.0</width>
+    <pixels>1500 1500</pixels>
+    <color id="93" rgb="255 255 153" />
+    <color id="95" rgb="128 128 128" />
+    <color id="96" rgb="0 128 0" />
+    <color id="97" rgb="102 178 255" />
+    <color id="98" rgb="255 153 255" />
+  </plot>
+</plots>
