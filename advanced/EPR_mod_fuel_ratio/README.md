@@ -26,7 +26,7 @@ The complete geometry is used to run the simulation but there is the possibility
 ## RESULTS
 The resulting dependency is pictured in a simple plot ([results.png](.results.png)):
 
-<img src='https://user-images.githubusercontent.com/36040421/135904923-3c9e58ed-c974-44d2-ba30-1d19b2053019.png' width='800'/>
+<img src='https://user-images.githubusercontent.com/36040421/145689022-18d3ac68-6e18-4db9-9df9-22320d3bbff2.png' width='800'/>
 
 We can verify that the simulation results match the existing literature:
 
