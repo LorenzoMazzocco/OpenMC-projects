@@ -5,12 +5,12 @@ The purpose of this repository is to host the code and the results of personal p
 
 The **structure** of the repository is the following:
 
-|BASIC                                             |ADVANCED                                                          |
-|--------------------------------------------------|------------------------------------------------------------------|
-|[LWR pincell](./basic/LWR_pincell/)               |[EPR moderator-to-fuel ratio](./advanced/EPR_mod_fuel_ratio/)     |
-|[SFR pincell](./basic/SFR_pincell/)               |[Lattice plotting tool](./advanced/EPR_lattice_table/)            |
-|[EPR lattice](./basic/EPR_lattice/)               |[Plutonium production in LWR pincell](./advanced/LWR_pincell_Pu/) |
-|[WGP breeding metric](./basic/WGP_breeding_metric/)|[BREST 300 design](./advanced/BREST_300)                         |
+|BASIC                                              |ADVANCED                                                          |
+|---------------------------------------------------|------------------------------------------------------------------|
+|[LWR pincell](./basic/LWR_pincell/)                |[EPR moderator-to-fuel ratio](./advanced/EPR_mod_fuel_ratio/)     |
+|[SFR pincell](./basic/SFR_pincell/)                |[Lattice plotting tool](./advanced/EPR_lattice_table/)            |
+|[EPR lattice](./basic/EPR_lattice/)                |[Plutonium production in LWR pincell](./advanced/LWR_pincell_Pu/) |
+|[WGP breeding metric](./basic/WGP_breeding_metric/)|[TRIGA full core](./advanced/TRIGA)                               |
 
 <br></br>
 
