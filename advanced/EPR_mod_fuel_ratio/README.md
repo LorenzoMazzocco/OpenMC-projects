@@ -7,10 +7,11 @@ The fuel and cladding geometries are fixed. n different pitches radiuses are tes
 plot](results.png) because the standard deviations of the k-inf distributions are negligible for all the configurations considered.
 <br/><br/>
 
+
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/36040421/135911129-22e743e3-ade0-4c85-8db9-90d240600ba1.png" width="300" />
-  <img src="https://user-images.githubusercontent.com/36040421/135911138-0be1dc88-08e6-4db0-ba38-48b6246cdf33.png" width="300" /> 
-  <img src="https://user-images.githubusercontent.com/36040421/135911140-a1142151-57ee-4196-8c21-406bf907df3d.png" width="300" />
+  <img src="https://user-images.githubusercontent.com/36040421/145688972-2826dc52-7cdd-41d3-bf6f-05349433bece.png" width="300" />
+  <img src="https://user-images.githubusercontent.com/36040421/145688987-ca9dd2a1-a54b-4e4f-84af-56821e92c835.png" width="300" /> 
+  <img src="https://user-images.githubusercontent.com/36040421/145688993-2b3ede87-21e8-4d09-ac26-d5ef11616d16.png" width="300" />
 </p>
 
 >Progression of assembly pitch (and whole geometry) during iterations of the script.
