@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<materials>
+  <material depletable="true" id="1" name="UZrH" temperature="300">
+    <density units="g/cc" value="6.34" />
+    <nuclide name="H1" wo="0.010296794718780167" />
+    <nuclide name="H2" wo="3.2052812198328432e-06" />
+    <nuclide name="Zr90" wo="0.46091860816671115" />
+    <nuclide name="Zr91" wo="0.10163426696713496" />
+    <nuclide name="Zr92" wo="0.15705794227786593" />
+    <nuclide name="Zr94" wo="0.16263013847095242" />
+    <nuclide name="Zr96" wo="0.026759044117335803" />
+    <nuclide name="U235" wo="0.0159" />
+    <nuclide name="U238" wo="0.0646" />
+    <sab name="c_H_in_ZrH" />
+  </material>
+  <material id="2" name="Al">
+    <density units="g/cc" value="2.71" />
+    <nuclide name="Al27" wo="0.996" />
+    <nuclide name="Cu63" wo="0.0013695839048342739" />
+    <nuclide name="Cu65" wo="0.0006304160951657262" />
+    <nuclide name="Fe54" wo="5.645558226400071e-05" />
+    <nuclide name="Fe56" wo="0.0009190152877178035" />
+    <nuclide name="Fe57" wo="2.1603686173836036e-05" />
+    <nuclide name="Fe58" wo="2.9254438443597745e-06" />
+    <nuclide name="V50" wo="2.4512033555527486e-06" />
+    <nuclide name="V51" wo="0.0009975487966444473" />
+  </material>
+  <material id="3" name="Sm2O3">
+    <density units="g/cc" value="2.42" />
+    <nuclide name="Sm144" wo="0.00020841136632270384" />
+    <nuclide name="Sm147" wo="0.0010361694204503132" />
+    <nuclide name="Sm148" wo="0.0007824163091033554" />
+    <nuclide name="Sm149" wo="0.0009676683486752602" />
+    <nuclide name="Sm150" wo="0.0005195087235054082" />
+    <nuclide name="Sm152" wo="0.0019100699182572757" />
+    <nuclide name="Sm154" wo="0.0016457559136856834" />
+    <nuclide name="O16" wo="0.46781149644586956" />
+    <nuclide name="O17" wo="0.00018850355413043524" />
+    <nuclide name="Al27" wo="0.525" />
+  </material>
+  <material id="4" name="H2O" temperature="300">
+    <density units="g/cc" value="1.0" />
+    <nuclide ao="1.99968852" name="H1" />
+    <nuclide ao="0.00031148" name="H2" />
+    <nuclide ao="0.999621" name="O16" />
+    <nuclide ao="0.000379" name="O17" />
+    <sab name="c_H_in_H2O" />
+  </material>
+  <material id="5" name="graphite">
+    <density units="g/cc" value="1.7" />
+    <nuclide name="C0" wo="0.99" />
+    <nuclide name="Fe54" wo="0.00045164465811200566" />
+    <nuclide name="Fe56" wo="0.007352122301742428" />
+    <nuclide name="Fe57" wo="0.0001728294893906883" />
+    <nuclide name="Fe58" wo="2.3403550754878196e-05" />
+    <nuclide name="Cu63" wo="0.0006847919524171369" />
+    <nuclide name="Cu65" wo="0.0003152080475828631" />
+    <nuclide name="Ti46" wo="7.920095256837681e-05" />
+    <nuclide name="Ti47" wo="7.297782322192596e-05" />
+    <nuclide name="Ti48" wo="0.000738450522279088" />
+    <nuclide name="Ti49" wo="5.532190533329482e-05" />
+    <nuclide name="Ti50" wo="5.4048796597314406e-05" />
+    <sab name="c_Graphite" />
+  </material>
+  <material id="6" name="boron">
+    <density units="g/cc" value="2.52" />
+    <nuclide ao="0.2" name="C0" />
+    <nuclide ao="0.158" name="B10" />
+    <nuclide ao="0.642" name="B11" />
+  </material>
+  <material id="7" name="borated_graphite">
+    <density units="g/cc" value="2.23" />
+    <nuclide ao="0.723" name="C0" />
+    <nuclide ao="0.0535" name="B10" />
+    <nuclide ao="0.217" name="B11" />
+  </material>
+</materials>
