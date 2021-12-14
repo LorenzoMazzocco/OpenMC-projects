@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def make_TRIGA(shim_level, trans_level, reg_level):
+def make_TRIGA(shim_level, trans_level, reg_level, plot_core=False):
 
     ###########################################################
     #                        MAIN VARIABLES                   #
@@ -15,10 +15,11 @@ def make_TRIGA(shim_level, trans_level, reg_level):
     control_trans_extraction_level = trans_level
     control_reg_extraction_level = reg_level
 
-    starting_point = -7.16
+    starting_height = -7.16
 
     plot_rod_universes = False
-    plot_core = True
+
+
 
     ###########################################################
     #                         MATERIALS                       #
@@ -74,7 +75,14 @@ def make_TRIGA(shim_level, trans_level, reg_level):
     BG.add_nuclide('B11', 2.17E-1, 'ao')
     BG.set_density('g/cc', 2.23)
 
-    materials = openmc.Materials([fuel, Al, Sm2O3, water, graphite, B4C, BG])
+    air = openmc.Material(name='air')
+    air.add_element('N', 0.78, 'ao')
+    air.add_element('O', 0.21, 'ao')
+    air.add_element('Ar', 0.1, 'ao')
+    air.set_density('g/cc', 1.225E-3)
+
+    materials = openmc.Materials([fuel, Al, Sm2O3, water, graphite, B4C, BG, air])
+    materials.cross_sections('')
     materials.export_to_xml()
 
 
@@ -141,9 +149,9 @@ def make_TRIGA(shim_level, trans_level, reg_level):
 
     ##################### SHIM
     shim_top = openmc.ZPlane(z0=control_shim_extraction_level)
-    shim_boron_top_surface = openmc.ZPlane(z0=control_shim_extraction_level+starting_point-2.54)
-    shim_boron_bottom_surface = openmc.ZPlane(z0=control_shim_extraction_level+starting_point-2.54-45.47)
-    shim_bottom = openmc.ZPlane(z0=control_shim_extraction_level+starting_point-2.54-45.47-1.6)
+    shim_boron_top_surface = openmc.ZPlane(z0=control_shim_extraction_level+starting_height-2.54)
+    shim_boron_bottom_surface = openmc.ZPlane(z0=control_shim_extraction_level+starting_height-2.54-45.47)
+    shim_bottom = openmc.ZPlane(z0=control_shim_extraction_level+starting_height-2.54-45.47-1.6)
 
     shim_id_surface = openmc.ZCylinder(r=2.85/2)
     shim_od_surface = openmc.ZCylinder(r=3.18/2)
@@ -162,9 +170,9 @@ def make_TRIGA(shim_level, trans_level, reg_level):
 
     ##################### TRANS
     trans_top = openmc.ZPlane(z0=control_trans_extraction_level)
-    trans_boron_top_surface = openmc.ZPlane(z0=control_trans_extraction_level+starting_point-2.54)
-    trans_boron_bottom_surface = openmc.ZPlane(z0=control_trans_extraction_level+starting_point-2.54-45.47)
-    trans_bottom = openmc.ZPlane(z0=control_trans_extraction_level+starting_point-2.54-45.47-1.6)
+    trans_boron_top_surface = openmc.ZPlane(z0=control_trans_extraction_level+starting_height-2.54)
+    trans_boron_bottom_surface = openmc.ZPlane(z0=control_trans_extraction_level+starting_height-2.54-45.47)
+    trans_bottom = openmc.ZPlane(z0=control_trans_extraction_level+starting_height-2.54-45.47-1.6)
 
     trans_id_surface = openmc.ZCylinder(r=2.21/2)
     trans_od_surface = openmc.ZCylinder(r=2.54/2)
@@ -183,9 +191,9 @@ def make_TRIGA(shim_level, trans_level, reg_level):
 
     ##################### REG
     reg_top = openmc.ZPlane(z0=control_reg_extraction_level)
-    reg_boron_top_surface = openmc.ZPlane(z0=control_reg_extraction_level+starting_point-2.54)
-    reg_boron_bottom_surface = openmc.ZPlane(z0=control_reg_extraction_level+starting_point-2.54-45.47)
-    reg_bottom = openmc.ZPlane(z0=control_reg_extraction_level+starting_point-2.54-45.47-1.6)
+    reg_boron_top_surface = openmc.ZPlane(z0=control_reg_extraction_level+starting_height-2.54)
+    reg_boron_bottom_surface = openmc.ZPlane(z0=control_reg_extraction_level+starting_height-2.54-45.47)
+    reg_bottom = openmc.ZPlane(z0=control_reg_extraction_level+starting_height-2.54-45.47-1.6)
 
     reg_id_surface = openmc.ZCylinder(r=1.93/2)
     reg_od_surface = openmc.ZCylinder(r=2.22/2)
@@ -229,9 +237,22 @@ def make_TRIGA(shim_level, trans_level, reg_level):
 
     graphite_universe = openmc.Universe(cells=[graphite_graphite_cell, graphite_cladding_cell, graphite_down_plug_cell, graphite_up_plug_cell, graphite_water, graphite_small_plug_up, graphite_small_plug_down, graphite_up_plug_water, graphite_down_plug_water])
 
+
+    ##################### IRRADIATION CHANNEL
+    irr_channel_ir = openmc.ZCylinder(r=3.58/2)
+    irr_channel_or = openmc.ZCylinder(r=3.76/2)
+
+    irr_channel_air_cell = openmc.Cell(fill=air, region=-irr_channel_ir)
+    irr_channel_clad_cell = openmc.Cell(fill=Al, region=+irr_channel_ir & -irr_channel_or)
+    irr_channel_water_cell = openmc.Cell(fill=water, region=+irr_channel_or)
+
+    irr_channel_universe = openmc.Universe(cells=[irr_channel_air_cell, irr_channel_clad_cell, irr_channel_water_cell])
+
     ##################### FULL WATER
     water_cell = openmc.Cell(fill=water)
     water_universe = openmc.Universe(cells=[water_cell])
+
+
 
 
     ##################################
@@ -271,7 +292,7 @@ def make_TRIGA(shim_level, trans_level, reg_level):
             inside_water_ring_cell.region &= +pin_boundary
 
             if i == 0:
-                pin = openmc.Cell(fill=water_universe, region=-pin_boundary)
+                pin = openmc.Cell(fill=irr_channel_universe, region=-pin_boundary)
                 #print('Adding CENTRAL CHANNEL')
             elif i == shim_position[0] and j == shim_position[1]:
                 pin = openmc.Cell(fill=shim_universe, region=-pin_boundary)
@@ -330,7 +351,7 @@ def make_TRIGA(shim_level, trans_level, reg_level):
 
     batches = 1000
     inactive = 200
-    particles = 10000
+    particles = 5000
 
     settings_file = openmc.Settings()
     settings_file.batches = batches
@@ -383,12 +404,22 @@ def make_TRIGA(shim_level, trans_level, reg_level):
         plt.savefig('images/reg/complete.png')
         plt.clf()
 
+        # IRRADIATION CHANNEL
+        irr_channel_universe.plot(origin=(0.0, 0.0, -40), width=(5.0, 30.0), pixels=(600, 300), basis='xz', color_by='material', colors={fuel:'grey', Sm2O3: 'red', Al:'black', graphite:'yellow', water:'blue', air:'pink'})
+        plt.savefig('images/irr_channel/close.png')
+        plt.clf()
+        irr_channel_universe.plot(origin=(0.0, 0.0, -40), width=(5.0, 100.0), pixels=(600, 300), basis='xz', color_by='material', colors={fuel:'grey', Sm2O3: 'red', Al:'black', graphite:'yellow', water:'blue', air:'pink'})
+        plt.savefig('images/irr_channel/complete.png')
+        plt.clf()
+
     if plot_core:
 
-        reactor_universe.plot(origin=(0,0,-40), width=(60,120), pixels=(500,500), basis='yz', color_by='material', colors={B4C:'red', fuel:'grey', Sm2O3: 'fuchsia', Al:'black', graphite:'yellow', water:'blue', BG:'red'})
-        plt.savefig('images/core/side.png')
+        reactor_universe.plot(origin=(0,0,-40), width=(60,120), pixels=(500,500), basis='yz', color_by='material', colors={B4C:'red', fuel:'grey', Sm2O3: 'fuchsia', Al:'black', graphite:'yellow', water:'blue', BG:'red', air:'pink'})
+        plt.savefig('images/calibration_plots/({:.1f},{:.1f},{:.1f}).png'.format(shim_level, trans_level, reg_level))
         plt.clf()
 
-        reactor_universe.plot(origin=(0,0, -30), width=(120,120), pixels=(600,600), basis='xy', color_by='material', colors={B4C:'red', fuel:'grey', Sm2O3: 'fuchsia', Al:'black', graphite:'yellow', water:'blue', BG:'red'})
+        """
+        reactor_universe.plot(origin=(0,0, -30), width=(120,120), pixels=(600,600), basis='xy', color_by='material', colors={B4C:'red', fuel:'grey', Sm2O3: 'fuchsia', Al:'black', graphite:'yellow', water:'blue', BG:'red', air:'pink'})
         plt.savefig('images/core/top.png')
         plt.clf()
+        """
