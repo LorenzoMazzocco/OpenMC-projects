@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <materials>
-  <material depletable="true" id="9" name="UZrH" temperature="300">
+  <cross_sections>jeff33_hdf5/cross_sections.xml</cross_sections>
+  <material depletable="true" id="1" name="UZrH" temperature="300">
     <density units="g/cc" value="6.34" />
     <nuclide name="H1" wo="0.010296794718780167" />
     <nuclide name="H2" wo="3.2052812198328432e-06" />
@@ -13,7 +14,7 @@
     <nuclide name="U238" wo="0.0646" />
     <sab name="c_H_in_ZrH" />
   </material>
-  <material id="10" name="Al">
+  <material id="2" name="Al">
     <density units="g/cc" value="2.71" />
     <nuclide name="Al27" wo="0.996" />
     <nuclide name="Cu63" wo="0.0013695839048342739" />
@@ -25,7 +26,7 @@
     <nuclide name="V50" wo="2.4512033555527486e-06" />
     <nuclide name="V51" wo="0.0009975487966444473" />
   </material>
-  <material id="11" name="Sm2O3">
+  <material id="3" name="Sm2O3">
     <density units="g/cc" value="2.42" />
     <nuclide name="Sm144" wo="0.00020841136632270384" />
     <nuclide name="Sm147" wo="0.0010361694204503132" />
@@ -38,7 +39,7 @@
     <nuclide name="O17" wo="0.00018850355413043524" />
     <nuclide name="Al27" wo="0.525" />
   </material>
-  <material id="12" name="H2O" temperature="300">
+  <material id="4" name="H2O" temperature="300">
     <density units="g/cc" value="1.0" />
     <nuclide ao="1.99968852" name="H1" />
     <nuclide ao="0.00031148" name="H2" />
@@ -46,7 +47,7 @@
     <nuclide ao="0.000379" name="O17" />
     <sab name="c_H_in_H2O" />
   </material>
-  <material id="13" name="graphite">
+  <material id="5" name="graphite">
     <density units="g/cc" value="1.7" />
     <nuclide name="C0" wo="0.99" />
     <nuclide name="Fe54" wo="0.00045164465811200566" />
@@ -62,19 +63,19 @@
     <nuclide name="Ti50" wo="5.4048796597314406e-05" />
     <sab name="c_Graphite" />
   </material>
-  <material id="14" name="boron">
+  <material id="6" name="boron">
     <density units="g/cc" value="2.52" />
     <nuclide ao="0.2" name="C0" />
     <nuclide ao="0.158" name="B10" />
     <nuclide ao="0.642" name="B11" />
   </material>
-  <material id="15" name="borated_graphite">
+  <material id="7" name="borated_graphite">
     <density units="g/cc" value="2.23" />
     <nuclide ao="0.723" name="C0" />
     <nuclide ao="0.0535" name="B10" />
     <nuclide ao="0.217" name="B11" />
   </material>
-  <material id="16" name="air">
+  <material id="8" name="air">
     <density units="g/cc" value="0.001225" />
     <nuclide ao="0.7771428600000001" name="N14" />
     <nuclide ao="0.00285714" name="N15" />

@@ -25,11 +25,11 @@ trans = convert_trans(433)
 reg = convert_reg(503)
 """
 
-
+"""
 ##################################
 #       REACTIVITY OF CRs        #
 ##################################
-"""
+
 # REACTIVITY OF REG
 # REG ALL IN (others in)
 shim = convert_shim(130)
@@ -52,7 +52,7 @@ openmc.lib.init()
 openmc.lib.run()
 k_eff_reg_out = openmc.lib.keff()
 openmc.lib.finalize()
-"""
+
 k_eff_reg_in = 0.9836626941765727
 k_eff_reg_out = 0.9992017510911007
 
@@ -62,6 +62,19 @@ print('keff_reg_out: {}'.format(k_eff_reg_out))
 print('rho_in: {}'.format(reactivity(k_eff_reg_in)))
 print('rho_out: {}'.format(reactivity(k_eff_reg_out)))
 print('delta_rho: {}'.format(reactivity(k_eff_reg_out)-reactivity(k_eff_reg_in)))
+"""
 
+# CHECK CRITICAL CONFIGURATIONS
+shim = convert_shim(436)
+trans = convert_trans(926)
+reg = convert_reg(559)
+
+make_TRIGA(shim,trans,reg, plot_core=False)
+openmc.lib.init()
+openmc.lib.run()
+k_eff = openmc.lib.keff()
+openmc.lib.finalize()
+
+print(k_eff)
 
 order_folder()

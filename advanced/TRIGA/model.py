@@ -82,7 +82,7 @@ def make_TRIGA(shim_level, trans_level, reg_level, plot_core=False):
     air.set_density('g/cc', 1.225E-3)
 
     materials = openmc.Materials([fuel, Al, Sm2O3, water, graphite, B4C, BG, air])
-    materials.cross_sections('')
+    #materials.cross_sections = 'jeff33_hdf5/cross_sections.xml'
     materials.export_to_xml()
 
 
