@@ -1,4 +1,4 @@
-# FULL CORE TRIGA
+# FULL 3D CORE TRIGA
 
 The objective of this project is to model a full 3D core of the Mk II TRIGA Research Reactor in Pavia (IT) and verify the validity of the model confronting the control rod calibration curves with experimental data. Multiple simplifications to the geometry were implemented.
 The main reference for this work is this [PhD Thesis](https://github.com/LorenzoMazzocco/OpenMC-projects/files/7717554/Development.and.Experimental.Validation.of.a.Monte.Carlo.Simulation.Model.for.the.TRIGA.Mark.II.Reactor.pdf) by Davide Chiesa.
