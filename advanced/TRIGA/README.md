@@ -37,4 +37,24 @@ Each control rods height level is parametrized in order to perform the calibrati
 <br></br>
 <br></br>
 
+### FUEL RODS
+The fuel matrix is ZrH (UZrH) with 20% wt enriched uranium.
+The fuel elements consist of single rods disposed directly into the core without the need for an assembly-type configuration.
+The following fuel types were provided:
+<p float="center">
+  <img width="589" src="https://user-images.githubusercontent.com/36040421/146161124-82d49119-5091-429c-8cba-00e9f62cf05c.png">
+</p>
+
+We've only selected the 101-Type and removed the little extention of graphite inside of the fuel matrix.
+
+<img width="427" alt="Schermata 2021-12-15 alle 10 37 38" src="https://user-images.githubusercontent.com/36040421/146161770-b438775b-a585-4286-b135-445a6ff7aced.png">
+
+<img width="430" alt="Schermata 2021-12-15 alle 10 37 44" src="https://user-images.githubusercontent.com/36040421/146161781-33357eaa-811a-4ad0-9c23-ab1b74d90978.png">
+
+
+
+
+
+>Milan (IT), november 2021
+
 
