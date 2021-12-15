@@ -45,15 +45,27 @@ The following fuel types were provided:
   <img width="589" src="https://user-images.githubusercontent.com/36040421/146161124-82d49119-5091-429c-8cba-00e9f62cf05c.png">
 </p>
 
-We've only selected the 101-Type and removed the little extention of graphite inside of the fuel matrix.
+We've only selected the 101-Type and removed the little extention of graphite inside of the fuel matrix. Following are a full-geometry picture and a close up to highligh the presence of the cladding and of the Samarium burnable absorber disk:
 
 <img width="427" alt="Schermata 2021-12-15 alle 10 37 38" src="https://user-images.githubusercontent.com/36040421/146161770-b438775b-a585-4286-b135-445a6ff7aced.png">
 
 <img width="430" alt="Schermata 2021-12-15 alle 10 37 44" src="https://user-images.githubusercontent.com/36040421/146161781-33357eaa-811a-4ad0-9c23-ab1b74d90978.png">
 
+<br></br>
+<br></br>
 
+### CONTROL RODS
+There are three control rods. Each one has a different radial geometry but they all have the same axial geometry.
 
+- SHIM: made of B4C, used to perform coarse variation of the k_eff during operation;
+- TRANS: made of borated graphite (BG), was used to perform pulse experiments but nowadays has only safety purposes and is rarely used;
+- REG: made of B4C, used to fine-tune k_eff at 1 during operation;
 
+Following are a full-geometry picture of the REG control rod and a close up to highligh the presence of the cladding:
+
+<img width="400" alt="Schermata 2021-12-15 alle 10 55 21" src="https://user-images.githubusercontent.com/36040421/146164715-d992339e-0340-4ee7-a391-b9651b2d068d.png">
+
+<img width="434" alt="Schermata 2021-12-15 alle 10 56 27" src="https://user-images.githubusercontent.com/36040421/146164791-92b3ba5e-05ea-48ff-89f9-3b4e20c3b6a0.png">
 
 >Milan (IT), november 2021
 
