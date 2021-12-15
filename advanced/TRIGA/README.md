@@ -78,6 +78,8 @@ In order to reduce the positive reactivity the following changes have been tried
 - different cross section libraries have been used (ENDF/B-VII.1 e JEFF-3.3);
 - different initial position references for the control rods have been tried;
 
+Probably the cause is the wrong initial position references of the control rods. Also an incorrect application of S(alpha,beta) tables will be investigated. 
+
 >Milan (IT), november 2021
 
 
