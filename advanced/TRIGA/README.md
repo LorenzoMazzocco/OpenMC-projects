@@ -67,6 +67,12 @@ Following are a full-geometry picture of the REG control rod and a close up to h
 
 <img width="434" alt="Schermata 2021-12-15 alle 10 56 27" src="https://user-images.githubusercontent.com/36040421/146164791-92b3ba5e-05ea-48ff-89f9-3b4e20c3b6a0.png">
 
+<br></br>
+<br></br>
+
+## PROBLEMS
+At the present moment the model shows a positive reactivity bias of 3 to 5 $. This is verifiable by performing an eigenvalue simulations on critical configurations of the control rods.
+
 >Milan (IT), november 2021
 
 
