@@ -73,6 +73,11 @@ Following are a full-geometry picture of the REG control rod and a close up to h
 ## PROBLEMS
 At the present moment the model shows a positive reactivity bias of 3 to 5 $. This is verifiable by performing an eigenvalue simulations on critical configurations of the control rods.
 
+In order to reduce the positive reactivity the following changes have been tried:
+- the irradiation channel has been extendend all the way to the bottom of the core;
+- different cross section libraries have been used (ENDF/B-VII.1 e JEFF-3.3);
+- different initial position references for the control rods have been tried;
+
 >Milan (IT), november 2021
 
 
